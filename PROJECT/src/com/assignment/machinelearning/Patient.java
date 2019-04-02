@@ -1,7 +1,7 @@
  package com.assignment.machinelearning;
 
 
-public class Person 
+public class Patient 
 {
 	//Attributes/////////
 	private String temperature;
@@ -10,7 +10,7 @@ public class Person
 	private String tonsillitis;
 	
 	//Constructor/////////
-	public Person(String temperature, String aches, String soreThroat, String tonsillitis)
+	public Patient(String temperature, String aches, String soreThroat, String tonsillitis)
 	{//use getters and setters
 		this.setTemperature(temperature);
 		this.setAches(aches);
@@ -29,31 +29,24 @@ public class Person
 	public String getTemperature() {
 		return temperature;
 	}
-
 	public void setTemperature(String temperature) {
 		this.temperature = temperature;
 	}
-
 	public String getAches() {
 		return aches;
 	}
-
 	public void setAches(String aches) {
 		this.aches = aches;
 	}
-
 	public String getSoreThroat() {
 		return soreThroat;
 	}
-
 	public void setSoreThroat(String soreThroat) {
 		this.soreThroat = soreThroat;
 	}
-
 	public String getTonsillitis() {
 		return tonsillitis;
 	}
-
 	public void setTonsillitis(String tonsillitis) {
 		this.tonsillitis = tonsillitis;
 	}
