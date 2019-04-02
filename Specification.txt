@@ -1,0 +1,108 @@
+Assignment OO Programming Sem 2 2019
+Java
+The aim of this assignment is to develop a java application that puts into practice the programming
+skills taught on your OO programming course.
+You have three different options for your project:
+• You can pick one of the ideas described in this document. You should read them anyway to give
+you an idea of the type and scale of assignment expected.
+• You can create your own idea e.g. a game, some sort of analysis tool, a solution to a puzzle, etc..
+your choice – but you need to get your idea approved first, to check it’s suitable.
+• You can do a team project, with up to 3 people, and pick your own idea as a group. This will
+need to be a bigger project, with each team member doing an identifiable, equal amount of the
+development.
+This assignment is worth 60% of your Sem 2 CA (and therefore, 30% of your OVERALL CA mark.
+What next?
+If you are doing one of the 5 ideas below - just go ahead and get started.
+If you are doing your OWN project idea, or a group idea, please submit a description of your idea
+to me by Friday March 15thth
+. Your idea must have some sort of algorithm in it – just as the
+sample projects shown here do – so keep that in mind. You should divide it into the core
+functionality, and the optional advanced features. I will approve the project or send it for redrafting
+if it is not suitable. The sooner you send it to me, the sooner you get it returned.
+Assignment criteria
+• All or most of your assignment should be written in Java. If there are extra parts (e.g.
+database) that is fine.
+• Your code should demonstrate the use of OO concepts. - including using classes for separate
+entities (as opposed to dumping everything into a single class), methods, encapsulated
+attributes, constructors, inheritance, interfaces, polymorphism.
+• Code should follow java naming standards, be well indented, bracket aligned , comment
+headers, comments.
+• You need to include a link to a short video with your submission to demo it, explain how you
+have coded it, what classes you have used and so on, how your algorithm worked . No more
+than 2 minutes. (It should be of your actual screens with your voice - as opposed to you!).
+• Include a readme file to briefly explain your project.
+• Use BitBucket or GIT to manage your source code. Your code and video link will be collected
+from your whatever code repository you use (more on this). If you haven’t used GIT, we can
+cover in class. 
+Assignment OO Programming Sem 2 2019
+Java
+• If you make use of any code directly from a book or online source, you must show this in the
+comments. You will be marked on code that is your own code.
+• Your will demo your code in the lab after Easter as part of the marking.
+• The assignment is due in on by end of day Friday April 11th
+Marking
+The marking scheme will be:
+- 10% Project management (demonstrating regular commits using GIT over the lifetime of the
+assignment)
+- 10% video explaining your assignment – available via YouTube or any video hosting service
+- 40% Basic core functionality: for well functioning, well implemented, using code that follows
+coding standard core functionality – i.e. the core of whatever problem you are solving.
+- 40% Optional advanced features: for added functionality that enhances whatever your idea is.
+
+
+
+
+-------------------------------------------------
+5. Machine learning model, using Naïve Bayes
+
+This assignment allows you to learn about machine learning, including building a
+predictive/classification model.
+Background: Machine learning is a huge component of Artificial Intelligence. It allows computers to
+perform tasks automatically, using algorithms to spot patterns (very similar to how humans do). A
+typical use of machine learning is to build classification models – which classify or predict what an
+input is about. For example, machine learning models can be created that are “trained” to a
+recognise a fraudulent insurance claim. This is done often done by looking at past examples
+insurance claims that were fraudulent and claims that weren’t fraudulent – and spotting the
+patterns associated with each. This is an example of “supervised learning” - where you allow a
+computer to learn from examples – and it’s very similar to how we learn as humans. We “train” a
+machine learning algorithm with examples (e.g. 100 “good” insurance claims, and 100 “fraudulent”
+claims). The algorithm figures out the patterns – and is able to then classify or predict whether a
+new claim is fraudulent or not, having sussed out the pattern.
+This assignment will use a popular machine learning algorithm called Naïve Bayes – to be
+explained in class. A simple dataset is provided below showing previous cases of whether patients
+had tonsillitis or not (based on assessing temperature, aches and pains and sore throat). Using java,
+the assignment should “train” a model using the dataset provided. Don’t hard code the classifier in
+anyway – make sure it is driven by the data dynamically in your code. Using a GUI, allow for patient
+symptoms to be put entered in, and the prediction model will give the probability of whether they
+have tonsillitis or not.
+To make this work well , you will need to have a GUI to take the new input (patient systems) that
+you want to test whether likely leading to tonsillitis or not.
+• Have the application read in the training set and do the training dynamically (i.e. don’t hard
+code the rules for the classifier).
+• If extra data rows, termed “instances” are added to the dataset, your classifier should still work
+(in fast, improved as a result of new data).
+• Allow for model to train on some of the dataset (e.g. 70%) and test itself on the remainder of
+the dataset(30%) so that it knows how “good” it is (i.e. be able to evaluate itself).
+Previous cases (i.e. "training" data):
+DataSet:
+Temperature Aches Sore throat Tonsillitis
+hot Yes No Yes
+Assignment OO Programming Sem 2 2019
+Java
+hot Yes Yes No
+hot No No No
+normal No Yes Yes
+cool Yes Yes no
+cool Yes No no
+cool No No yes
+normal No Yes yes
+cool No No no
+normal Yes Yes yes
+normal Yes Yes yes
+normal No Yes yes
+hot Yes No no
+normal Yes No no
+hot Yes Yes no
+normal No Yes yes
+cool Yes No no
+normal Yes Yes yes
