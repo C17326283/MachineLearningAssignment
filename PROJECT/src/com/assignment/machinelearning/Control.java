@@ -16,6 +16,11 @@ public class Control
 		patientList.add(new Patient("hot","Yes","Yes","No"));
 		patientList.add(new Patient("hot","No","No","No"));
 		
+		for(int i = 0; i < patientList.size(); i++)//System.out.println(peopleList);//Prints all
+		{
+			System.out.println(patientList.get(i));
+		}
+		
 		Gui screen1 = new Gui();
 	}
 }

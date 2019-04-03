@@ -21,7 +21,7 @@ public class Patient
 	//Methods//////////
 	public String toString()
 	{
-		return("Temp:" +getTemperature()+" Aches: "+getAches()+" SoreThroat: "+getSoreThroat()+" Tonsilitis: "+getTonsillitis());
+		return("Temp:" +getTemperature()+" Aches:"+getAches()+" SoreThroat:"+getSoreThroat()+" Tonsilitis: "+getTonsillitis());
 	}
 
 	

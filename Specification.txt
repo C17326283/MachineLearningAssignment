@@ -87,8 +87,6 @@ Previous cases (i.e. "training" data):
 DataSet:
 Temperature Aches Sore throat Tonsillitis
 hot Yes No Yes
-Assignment OO Programming Sem 2 2019
-Java
 hot Yes Yes No
 hot No No No
 normal No Yes Yes
