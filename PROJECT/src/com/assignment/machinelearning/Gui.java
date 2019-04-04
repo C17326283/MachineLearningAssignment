@@ -210,7 +210,6 @@ public class Gui extends JFrame implements ActionListener
 			{
 				System.out.print("NO INPUT");
 			}
-		
 		}
 	}
 }
