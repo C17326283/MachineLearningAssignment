@@ -18,6 +18,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.awt.Color;
@@ -26,11 +28,19 @@ public class Gui extends JFrame implements ActionListener
 {
 //Make all attributes//////////////////////////////////////////////////////////////
 
-	
+	JButton submitB;
+	JRadioButton b1;
+	JRadioButton b2;
+	JRadioButton b3;
+	JRadioButton b4;
+	JRadioButton b5;
+	JRadioButton b6;
+	JRadioButton b7;
+	JRadioButton b8;
+	JRadioButton b9;
 	//Constructor////////////////////
 	public Gui()//Construct
 	{ 
-		JButton subB;
 	//Make/////
 		//Make dirrectly instead of 
 	    JFrame frame = new JFrame("Ryan Byrne Assignment");//The main window 
@@ -46,17 +56,17 @@ public class Gui extends JFrame implements ActionListener
 	    JPanel fillerPanel3 = new JPanel();
 	    
 	    //The buttons for selecting symptoms
-	    JRadioButton b1 = new JRadioButton("Cold");  
-	    JRadioButton b2 = new JRadioButton("Normal");
-	    JRadioButton b3 = new JRadioButton("Hot");
-	    JRadioButton b4 = new JRadioButton("Yes");  
-	    JRadioButton b5 = new JRadioButton("No"); 
-	    JRadioButton b6 = new JRadioButton("Yes");  
-	    JRadioButton b7 = new JRadioButton("No");  
-	    JRadioButton b8 = new JRadioButton("Yes");  
-	    JRadioButton b9 = new JRadioButton("No");
-	    subB = new JButton("Submit");
-	    subB.addActionListener(this);
+	    b1 = new JRadioButton("Cold");  
+	    b2 = new JRadioButton("Normal");
+	    b3 = new JRadioButton("Hot");
+	    b4 = new JRadioButton("Yes");  
+	    b5 = new JRadioButton("No"); 
+	    b6 = new JRadioButton("Yes");  
+	    b7 = new JRadioButton("No");  
+	    b8 = new JRadioButton("Yes");  
+	    b9 = new JRadioButton("No");
+	    submitB = new JButton("Submit");
+	    submitB.addActionListener(this);
 	    
 	    //The text next to input
 	    JLabel l1 = new JLabel("Temperature:  ");
@@ -65,10 +75,10 @@ public class Gui extends JFrame implements ActionListener
 	    JLabel l4 = new JLabel("Tonsillitis:  ");
 	    
 	    //Button Group to make only one selectable
-	    ButtonGroup Group1 = new ButtonGroup();
-	    ButtonGroup Group2 = new ButtonGroup();
-	    ButtonGroup Group3 = new ButtonGroup();
-	    ButtonGroup Group4 = new ButtonGroup();
+	    ButtonGroup tempGroup = new ButtonGroup();
+	    ButtonGroup acheGroup = new ButtonGroup();
+	    ButtonGroup throatGroup = new ButtonGroup();
+	    ButtonGroup tonsGroup = new ButtonGroup();
 	    
 	//Add/////
 	    frame.add(panel1);//add panel1 to frame
@@ -77,7 +87,7 @@ public class Gui extends JFrame implements ActionListener
 		frame.add(panel4);
 		
 		panel2.add(gridPanel);
-		panel3.add(subB);
+		panel3.add(submitB);
 		
 		//Grid for inputs
 		gridPanel.add(l1); gridPanel.add(b1); gridPanel.add(b2); gridPanel.add(b3);
@@ -86,15 +96,15 @@ public class Gui extends JFrame implements ActionListener
 		gridPanel.add(l4); gridPanel.add(b8); gridPanel.add(b9); gridPanel.add(fillerPanel3);
 		
 		//Put radio buttons in group
-		Group1.add(b1);
-	    Group1.add(b2);
-	    Group1.add(b3);
-	    Group2.add(b4);
-	    Group2.add(b5);
-	    Group3.add(b6);
-	    Group3.add(b7);
-	    Group4.add(b8);
-	    Group4.add(b9);
+		tempGroup.add(b1);
+	    tempGroup.add(b2);
+	    tempGroup.add(b3);
+	    acheGroup.add(b4);
+	    acheGroup.add(b5);
+	    throatGroup.add(b6);
+	    throatGroup.add(b7);
+	    tonsGroup.add(b8);
+	    tonsGroup.add(b9);
 	    
 	//Edit/////
 	    //Frame
@@ -116,7 +126,7 @@ public class Gui extends JFrame implements ActionListener
 	    //Set fonts for everything//Only set once so didnt use method
 	    Font fontB = new Font("Open Sans", Font.BOLD,24);//Make a font style
 	    Font font = new Font("Open Sans", Font.PLAIN,24);
-	    subB.setFont(fontB);// apply the font style to all
+	    submitB.setFont(fontB);// apply the font style to all
 	    l1.setFont(fontB);
 	    l2.setFont(fontB);
 	    l3.setFont(fontB);
@@ -133,12 +143,74 @@ public class Gui extends JFrame implements ActionListener
 	}  
 
 	//Methods///////////
-	public void actionPerformed(ActionEvent anything)
+	public void actionPerformed(ActionEvent EV)
 	{
-		if(anything.getSource() == subB)//get source shows what functionality triggered it
+		if(EV.getSource() == submitB)//get source shows what functionality triggered it
 		{
+			//Temp
+			System.out.print("\nTemperature: ");
+			if(b1.isSelected())
+			{
+				System.out.print("Cold");
+			}
+			else if (b2.isSelected())
+			{
+				System.out.print("Normal");
+			}
+			else if(b3.isSelected())
+			{
+				System.out.print("Hot");
+			}
+			else
+			{
+				System.out.print("NO INPUT");
+			}
 			
+			//Aches
+			System.out.print("\nAches: ");
+			if(b4.isSelected())
+			{
+				System.out.print("Yes");
+			}
+			else if (b5.isSelected())
+			{
+				System.out.print("No");
+			}
+			else			
+			{
+				System.out.print("NO INPUT");
+			} 
 			
+			//Sore throat
+			System.out.print("\nSore throat: ");
+			if(b6.isSelected())
+			{
+				System.out.print("Yes");
+			}
+			else if (b7.isSelected())
+			{
+				System.out.print("No");
+			}
+			else			
+			{
+				System.out.print("NO INPUT");
+			}
+			
+			//Tonsillitis
+			System.out.print("\nTonsillitis: ");
+			if(b8.isSelected())
+			{
+				System.out.print("Yes");
+			}
+			else if (b9.isSelected())
+			{
+				System.out.print("No");
+			}
+			else			
+			{
+				System.out.print("NO INPUT");
+			}
+		
 		}
 	}
 }
