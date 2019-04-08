@@ -4,29 +4,30 @@ import javax.swing.JOptionPane;
 
 public class Patient 
 {
-	//Attributes/////////
+//Attributes/////////
 	private String temperature;
 	private String aches;
 	private String soreThroat;
 	private String tonsillitis;
 	
-	//Constructor/////////
+//Constructor/////////
 	public Patient(String temperature, String aches, String soreThroat, String tonsillitis)
-	{//use getters and setters
+	{
+		//use getters and setters
 		this.setTemperature(temperature);
 		this.setAches(aches);
 		this.setSoreThroat(soreThroat);
 		this.setTonsillitis(tonsillitis);
 	}
 	
-	//Methods//////////
+//Methods//////////
 	public String toString()
 	{
 		return("Temp:" +getTemperature()+" Aches:"+getAches()+" SoreThroat:"+getSoreThroat()+" Tonsilitis: "+getTonsillitis());
 	}
 
 	
-	//Getters and Setters/////////////////
+//GETTERS AND SETTERS/////////////////
 	public String getTemperature() {
 		return temperature;
 	}

@@ -38,7 +38,8 @@ public class Gui extends JFrame implements ActionListener
 	JRadioButton b7;
 	JRadioButton b8;
 	JRadioButton b9;
-	//Constructor////////////////////
+	
+//Constructor////////////////////
 	public Gui()//Construct
 	{ 
 	//Make/////
@@ -112,7 +113,7 @@ public class Gui extends JFrame implements ActionListener
 	    frame.setVisible(true); 
 	    frame.setLayout(new GridLayout(4,1));//grid layout of rows, columns 
 	    
-	  //Input grid settings
+	    //Input grid settings
 	    gridPanel.setLayout(new GridLayout(4,4));
 	  
 	    //Panels 
@@ -142,11 +143,14 @@ public class Gui extends JFrame implements ActionListener
 	    b9.setFont(font);
 	}  
 
-	//Methods///////////
+//Methods///////////
 	public void actionPerformed(ActionEvent EV)
 	{
+		
 		if(EV.getSource() == submitB)//get source shows what functionality triggered it
 		{
+			boolean incorrectInput = false;
+			
 			//Temp
 			System.out.print("\nTemperature: ");
 			if(b1.isSelected())
@@ -163,6 +167,7 @@ public class Gui extends JFrame implements ActionListener
 			}
 			else
 			{
+				incorrectInput = true;
 				System.out.print("NO INPUT");
 			}
 			
@@ -178,6 +183,7 @@ public class Gui extends JFrame implements ActionListener
 			}
 			else			
 			{
+				incorrectInput = true;
 				System.out.print("NO INPUT");
 			} 
 			
@@ -193,6 +199,7 @@ public class Gui extends JFrame implements ActionListener
 			}
 			else			
 			{
+				incorrectInput = true;
 				System.out.print("NO INPUT");
 			}
 			
@@ -208,7 +215,13 @@ public class Gui extends JFrame implements ActionListener
 			}
 			else			
 			{
+				incorrectInput = true;
 				System.out.print("NO INPUT");
+			}
+			
+			if(incorrectInput == true)
+			{
+				JOptionPane.showMessageDialog(this,"There was incorrect input, please try again.");
 			}
 		}
 	}

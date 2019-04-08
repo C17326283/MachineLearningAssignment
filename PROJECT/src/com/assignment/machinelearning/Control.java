@@ -16,18 +16,14 @@ import java.util.ArrayList;
 public class Control
 {
 	public static void main(String[] args)
-	{
-		ArrayList<Patient> patientList = new ArrayList<Patient>();//Have array for patient details
-		patientList.add(new Patient("hot","Yes","No","Yes"));//Temp,Aches,SoreThroat,Tonsillitis //test data
-		patientList.add(new Patient("hot","Yes","Yes","No"));
-		patientList.add(new Patient("hot","No","No","No"));
+	{	
+		Gui screen1 = new Gui();//Make an instance of the gui to use it
+		FileProcessor f1 = new FileProcessor();//fills TestCaseList() with stuff from file
 		
-		for(int i = 0; i < patientList.size(); i++)//System.out.println(peopleList);//Prints all
+		//This was just testing calling specific values from the test case list
+		for(int i=0; i <  f1.getTestCaseList().size(); i++)
 		{
-			System.out.println(patientList.get(i));
+			System.out.println(f1.getTestCase(i));
 		}
-		
-	//	Gui screen1 = new Gui();//Make an instance of the gui to use it
-		FileProcessor f1 = new FileProcessor();
 	}
 }
