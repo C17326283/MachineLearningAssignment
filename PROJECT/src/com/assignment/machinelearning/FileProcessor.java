@@ -1,3 +1,4 @@
+//TODO make the file path changeable in app
 package com.assignment.machinelearning;
 
 import java.io.File;

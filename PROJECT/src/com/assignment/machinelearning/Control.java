@@ -17,13 +17,16 @@ public class Control
 {
 	public static void main(String[] args)
 	{	
-		Gui screen1 = new Gui();//Make an instance of the gui to use it
+//		Gui screen1 = new Gui();//Make an instance of the gui to use it
 		FileProcessor f1 = new FileProcessor();//fills TestCaseList() with stuff from file
 		
 		//This was just testing calling specific values from the test case list
-		for(int i=0; i <  f1.getTestCaseList().size(); i++)
+/*		for(int i=0; i <  f1.getTestCaseList().size(); i++)
 		{
+			System.out.print(i+" ");
 			System.out.println(f1.getTestCase(i));
 		}
+*/		
+		Calculations c1 = new Calculations();
 	}
 }
