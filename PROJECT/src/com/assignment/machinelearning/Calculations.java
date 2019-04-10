@@ -5,35 +5,35 @@ import java.util.ArrayList;
 public class Calculations 
 {
 	//Make variables//////////
-	int patientsCount = 0;
+	float patientsCount = 0;
 	
-	int yesTonsillitisCount = 0;
-	int noTonsillitisCount = 0;
+	float yesTonsillitisCount = 0;
+	float noTonsillitisCount = 0;
 	
-	int CoolAndTS;
-	int NormalAndTS;
-	int HotAndTS;
-	int AchesAndTS;
-	int NoAchesAndTS;
-	int SoreAndTS;
-	int NoSoreAndTS;
-	
-	int CoolNoTS;
-	int NormalNoTS;
-	int HotNoTS;
-	int AchesNoTS;
-	int NoAchesNoTS;
-	int SoreNoTS;
-	int NoSoreNoTS;
-	
+	float tempWithTS;
+	float tempWithoutTS;
+	float achesWithTS;
+	float achesWithoutTS;
+	float soreWithTS;
+	float soreWithoutTS;
 	//Sample patient for testing
-	String Temp = "Hot";
-	String Aches = "Yes";
-	String Sore = "Yes";
+	String temp;
+	String aches;
+	String sore;
+	
+	float ProbOfTS;
+	float ProbOfNotTS;
+	float z;
+	float ProbabilityOfTS;
+	float ProbabilityOfNotTS;
 	
 	//Constructor//////////
-	public Calculations()
+	public Calculations(String temp, String aches, String sore)//Catches and currently renames
 	{
+		this.temp = temp;
+		this.aches = aches;
+		this.sore = sore;
+		
 		FileProcessor f1 = new FileProcessor();//Make instance//This makes an arraylist of patient objects to call from
 		
 		patientsCount = f1.getTestCaseList().size();//
@@ -52,105 +52,113 @@ public class Calculations
 			
 			//TEMPS
 			//Checks input so it can run the right code without using non relevant variables
-			if(Temp == "Cool")
+			if(temp == "Cool")
 			{
 				if(f1.getTestCase(i).getTemperature().contentEquals("Cool") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
-					CoolAndTS++;
+					tempWithTS++;
 				}
 				else if(f1.getTestCase(i).getTemperature().contentEquals("Cool") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
-					CoolNoTS++;
+					tempWithoutTS++;
 				}
 			}
-			else if(Temp == "Normal")
+			else if(temp == "Normal")
 			{
 				if(f1.getTestCase(i).getTemperature().contentEquals("Normal") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
-					NormalAndTS++;
+					tempWithTS++;
 				}
 				else if(f1.getTestCase(i).getTemperature().contentEquals("Normal") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
-					NormalNoTS++;
+					tempWithoutTS++;
 				}
 			}
-			else if(Temp == "Hot")
+			else if(temp == "Hot")
 			{
 				if(f1.getTestCase(i).getTemperature().contentEquals("Hot") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
-					HotAndTS++;
+					tempWithTS++;
 				}
 				else if(f1.getTestCase(i).getTemperature().contentEquals("Hot") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
-					HotNoTS++;
+					tempWithoutTS++;
 				}
 			}
 			
 			//ACHES
-			if(Aches == "Yes")
+			if(aches == "Yes")
 			{
 				if(f1.getTestCase(i).getAches().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
-					AchesAndTS++;
+					achesWithTS++;
 				}
 				else if(f1.getTestCase(i).getAches().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
-					AchesNoTS++;
+					achesWithoutTS++;
 				}
 			}
-			else if(Aches == "No")
+			else if(aches == "No")
 			{
 				if(f1.getTestCase(i).getAches().contentEquals("No") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
-					NoAchesAndTS++;
+					achesWithTS++;
 				}
 				else if(f1.getTestCase(i).getAches().contentEquals("No") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
-					NoAchesNoTS++;
+					achesWithoutTS++;
 				}
 			}
 			
 			//SORE THROAT
-			if(Sore == "Yes")
+			if(sore == "Yes")
 			{
 				if(f1.getTestCase(i).getSoreThroat().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
-					SoreAndTS++;
+					soreWithTS++;
 				}
 				else if(f1.getTestCase(i).getSoreThroat().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
-					SoreNoTS++;
+					soreWithoutTS++;
 				}
 			}
-			else if(Sore == "No")
+			else if(sore == "No")
 			{
 				if(f1.getTestCase(i).getSoreThroat().contentEquals("No") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
-					NoSoreAndTS++;
+					soreWithTS++;
 				}
 				else if(f1.getTestCase(i).getSoreThroat().contentEquals("No") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
-					NoSoreNoTS++;
+					soreWithoutTS++;
 				}
 			}
 		}//end for
-			
-		System.out.println("cool: "+CoolAndTS+"/"+yesTonsillitisCount);
-		System.out.println("norm: "+NormalAndTS+"/"+yesTonsillitisCount);
-		System.out.println("hot: "+HotAndTS+"/"+yesTonsillitisCount);
-		System.out.println("aches: "+AchesAndTS+"/"+yesTonsillitisCount);
-		System.out.println("no aches: "+NoAchesAndTS+"/"+yesTonsillitisCount);
-		System.out.println("sore: "+SoreAndTS+"/"+yesTonsillitisCount);
-		System.out.println("no sore: "+NoSoreAndTS+"/"+yesTonsillitisCount);
 		
-		System.out.println("cool no ts: "+CoolNoTS+"/"+noTonsillitisCount);
-		System.out.println("norm no ts: "+NormalNoTS+"/"+noTonsillitisCount);
-		System.out.println("hot no ts: "+HotNoTS+"/"+noTonsillitisCount);
-		System.out.println("aches no ts: "+AchesNoTS+"/"+noTonsillitisCount);
-		System.out.println("no aches no ts: "+NoAchesNoTS+"/"+noTonsillitisCount);
-		System.out.println("sore no ts: "+SoreNoTS+"/"+noTonsillitisCount);
-		System.out.println("no sore no ts: "+NoSoreNoTS+"/"+noTonsillitisCount);
-
+		
+		ProbOfTS = (tempWithTS/yesTonsillitisCount)*(achesWithTS/yesTonsillitisCount)*(soreWithTS/yesTonsillitisCount)*(yesTonsillitisCount/patientsCount);
+		ProbOfNotTS = (tempWithoutTS/noTonsillitisCount)*(achesWithoutTS/noTonsillitisCount)*(soreWithoutTS/noTonsillitisCount)*(noTonsillitisCount/patientsCount);
+		z = ProbOfTS + ProbOfNotTS;
+		ProbabilityOfTS = ProbOfTS / z;
+		ProbabilityOfNotTS = ProbOfNotTS / z;
+		
+		System.out.println("yesTonsillitisCount: "+yesTonsillitisCount+"\n");
+		
+		System.out.println("TempWithTS: "+tempWithTS+"/"+yesTonsillitisCount+"="+tempWithTS/yesTonsillitisCount);
+		System.out.println("AchesWithTS: "+achesWithTS+"/"+yesTonsillitisCount+"="+achesWithTS/yesTonsillitisCount);
+		System.out.println("SoreWithTS: "+soreWithTS+"/"+yesTonsillitisCount+"="+soreWithTS/yesTonsillitisCount+"\n");
+		
+		System.out.println("TempWithoutTS: "+tempWithoutTS+"/"+noTonsillitisCount+"="+tempWithoutTS/noTonsillitisCount);
+		System.out.println("AchesWithoutTS: "+achesWithoutTS+"/"+noTonsillitisCount+"="+achesWithoutTS/noTonsillitisCount);
+		System.out.println("SoreWithoutTS: "+soreWithoutTS+"/"+noTonsillitisCount+"="+soreWithoutTS/noTonsillitisCount+"\n");
+		
+		System.out.println("ProbOfTS: "+ProbOfTS);
+		System.out.println("ProbOfNotTS: "+ProbOfNotTS);
+		
+		System.out.println("Probs added together: "+z+"\n");
+		
+		System.out.println("Probability of TS: "+ProbabilityOfTS);
+		System.out.println("Probability of not TS: "+ProbabilityOfNotTS);
 	}
 }
 

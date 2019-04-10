@@ -149,77 +149,62 @@ public class Gui extends JFrame implements ActionListener
 		
 		if(EV.getSource() == submitB)//get source shows what functionality triggered it
 		{
+			String inputTemp = null;
+			String inputAches = null;
+			String inputSore = null;
 			boolean incorrectInput = false;
 			
 			//Temp
-			System.out.print("\nTemperature: ");
 			if(b1.isSelected())
 			{
-				System.out.print("Cold");
+				inputTemp = "Cool";
 			}
 			else if (b2.isSelected())
 			{
-				System.out.print("Normal");
+				inputTemp = "Normal";
 			}
 			else if(b3.isSelected())
 			{
-				System.out.print("Hot");
+				inputTemp = "Hot";
 			}
 			else
 			{
 				incorrectInput = true;
-				System.out.print("NO INPUT");
 			}
 			
 			//Aches
-			System.out.print("\nAches: ");
 			if(b4.isSelected())
 			{
-				System.out.print("Yes");
+				inputAches = "Yes";
 			}
 			else if (b5.isSelected())
 			{
-				System.out.print("No");
+				inputAches = "No";
 			}
 			else			
 			{
 				incorrectInput = true;
-				System.out.print("NO INPUT");
 			} 
 			
 			//Sore throat
-			System.out.print("\nSore throat: ");
 			if(b6.isSelected())
 			{
-				System.out.print("Yes");
+				inputSore = "Yes";
 			}
 			else if (b7.isSelected())
 			{
-				System.out.print("No");
+				inputSore = "No";
 			}
 			else			
 			{
 				incorrectInput = true;
-				System.out.print("NO INPUT");
 			}
 			
-			//Tonsillitis
-			System.out.print("\nTonsillitis: ");
-			if(b8.isSelected())
+			if(incorrectInput == false)
 			{
-				System.out.print("Yes");
+				Calculations c1 = new Calculations(inputTemp, inputAches, inputSore);
 			}
-			else if (b9.isSelected())
-			{
-				System.out.print("No");
-			}
-			else			
-			{
-				incorrectInput = true;
-				System.out.print("NO INPUT");
-			}
-			
-			if(incorrectInput == true)
+			else if(incorrectInput == true)
 			{
 				JOptionPane.showMessageDialog(this,"There was incorrect input, please try again.");
 			}

@@ -17,9 +17,8 @@ public class Control
 {
 	public static void main(String[] args)
 	{	
-//		Gui screen1 = new Gui();//Make an instance of the gui to use it
+		Gui screen1 = new Gui();//Make an instance of the gui to use it
 		FileProcessor f1 = new FileProcessor();//fills TestCaseList() with stuff from file
 		
-		Calculations c1 = new Calculations();
 	}
 }
