@@ -10,18 +10,21 @@ public class Calculations
 	int yesTonsillitisCount = 0;
 	int noTonsillitisCount = 0;
 	
-
 	int CoolAndTS;
-	int NormAndTS;
+	int NormalAndTS;
 	int HotAndTS;
 	int AchesAndTS;
+	int NoAchesAndTS;
 	int SoreAndTS;
+	int NoSoreAndTS;
 	
 	int CoolNoTS;
-	int NormNoTS;
+	int NormalNoTS;
 	int HotNoTS;
 	int AchesNoTS;
+	int NoAchesNoTS;
 	int SoreNoTS;
+	int NoSoreNoTS;
 	
 	//Sample patient for testing
 	String Temp = "Hot";
@@ -37,79 +40,118 @@ public class Calculations
 		
 		for(int i=0; i <  f1.getTestCaseList().size(); i++)//count all the values in every object
 		{
-			//Find prob of aches when have tonsillitis
-			if(f1.getTestCase(i).getTemperature().contentEquals("Cool") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+			//amount of people with tonsillitis
+			if(f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))
 			{
-				CoolAndTS++;
+				yesTonsillitisCount++;
 			}
-			else if(f1.getTestCase(i).getTemperature().contentEquals("Normal") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+			else if(f1.getTestCase(i).getTonsillitis().contentEquals("No"))
 			{
-				NormAndTS++;
+				noTonsillitisCount++;
+			}	
+			
+			//TEMPS
+			//Checks input so it can run the right code without using non relevant variables
+			if(Temp == "Cool")
+			{
+				if(f1.getTestCase(i).getTemperature().contentEquals("Cool") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				{
+					CoolAndTS++;
+				}
+				else if(f1.getTestCase(i).getTemperature().contentEquals("Cool") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				{
+					CoolNoTS++;
+				}
 			}
-			else if(f1.getTestCase(i).getTemperature().contentEquals("Hot") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+			else if(Temp == "Normal")
 			{
-				HotAndTS++;
+				if(f1.getTestCase(i).getTemperature().contentEquals("Normal") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				{
+					NormalAndTS++;
+				}
+				else if(f1.getTestCase(i).getTemperature().contentEquals("Normal") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				{
+					NormalNoTS++;
+				}
+			}
+			else if(Temp == "Hot")
+			{
+				if(f1.getTestCase(i).getTemperature().contentEquals("Hot") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				{
+					HotAndTS++;
+				}
+				else if(f1.getTestCase(i).getTemperature().contentEquals("Hot") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				{
+					HotNoTS++;
+				}
 			}
 			
-			if(f1.getTestCase(i).getAches().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+			//ACHES
+			if(Aches == "Yes")
 			{
-				AchesAndTS++;
+				if(f1.getTestCase(i).getAches().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				{
+					AchesAndTS++;
+				}
+				else if(f1.getTestCase(i).getAches().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				{
+					AchesNoTS++;
+				}
+			}
+			else if(Aches == "No")
+			{
+				if(f1.getTestCase(i).getAches().contentEquals("No") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				{
+					NoAchesAndTS++;
+				}
+				else if(f1.getTestCase(i).getAches().contentEquals("No") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				{
+					NoAchesNoTS++;
+				}
 			}
 			
-			if(f1.getTestCase(i).getSoreThroat().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+			//SORE THROAT
+			if(Sore == "Yes")
 			{
-				SoreAndTS++;
+				if(f1.getTestCase(i).getSoreThroat().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				{
+					SoreAndTS++;
+				}
+				else if(f1.getTestCase(i).getSoreThroat().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				{
+					SoreNoTS++;
+				}
 			}
+			else if(Sore == "No")
+			{
+				if(f1.getTestCase(i).getSoreThroat().contentEquals("No") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				{
+					NoSoreAndTS++;
+				}
+				else if(f1.getTestCase(i).getSoreThroat().contentEquals("No") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				{
+					NoSoreNoTS++;
+				}
+			}
+		}//end for
 			
-			
-			//prob of not having tonsillitis with symptom
-			if(f1.getTestCase(i).getTemperature().contentEquals("Cool") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
-			{
-				CoolNoTS++;
-			}
-			else if(f1.getTestCase(i).getTemperature().contentEquals("Normal") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
-			{
-				NormNoTS++;
-			}
-			else if(f1.getTestCase(i).getTemperature().contentEquals("Hot") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
-			{
-				HotNoTS++;
-			}
-			
-			if(f1.getTestCase(i).getAches().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
-			{
-				AchesNoTS++;
-			}
-			
-			if(f1.getTestCase(i).getSoreThroat().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
-			{
-				SoreNoTS++;
-			}
-		}
-		
 		System.out.println("cool: "+CoolAndTS+"/"+yesTonsillitisCount);
-		System.out.println("norm: "+NormAndTS+"/"+yesTonsillitisCount);
+		System.out.println("norm: "+NormalAndTS+"/"+yesTonsillitisCount);
 		System.out.println("hot: "+HotAndTS+"/"+yesTonsillitisCount);
 		System.out.println("aches: "+AchesAndTS+"/"+yesTonsillitisCount);
+		System.out.println("no aches: "+NoAchesAndTS+"/"+yesTonsillitisCount);
 		System.out.println("sore: "+SoreAndTS+"/"+yesTonsillitisCount);
+		System.out.println("no sore: "+NoSoreAndTS+"/"+yesTonsillitisCount);
 		
 		System.out.println("cool no ts: "+CoolNoTS+"/"+noTonsillitisCount);
-		System.out.println("norm no ts: "+NormNoTS+"/"+noTonsillitisCount);
+		System.out.println("norm no ts: "+NormalNoTS+"/"+noTonsillitisCount);
 		System.out.println("hot no ts: "+HotNoTS+"/"+noTonsillitisCount);
 		System.out.println("aches no ts: "+AchesNoTS+"/"+noTonsillitisCount);
+		System.out.println("no aches no ts: "+NoAchesNoTS+"/"+noTonsillitisCount);
 		System.out.println("sore no ts: "+SoreNoTS+"/"+noTonsillitisCount);
-/*		
-		System.out.println("Patients: "+patientsCount);
-		System.out.println("coolTempCount: "+coolTempCount);
-		System.out.println("normTempCount: "+normTempCount);
-		System.out.println("hotTempCount: "+hotTempCount);
-		System.out.println("yesAchesCount: "+yesAchesCount);
-		System.out.println("noAchesCount: "+noAchesCount);
-		System.out.println("yesSoreCount: "+yesSoreCount);
-		System.out.println("noSoreCount: "+noSoreCount);
-*/	
-	}
+		System.out.println("no sore no ts: "+NoSoreNoTS+"/"+noTonsillitisCount);
 
+	}
 }
 
 /*
