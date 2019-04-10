@@ -25,7 +25,6 @@ public class Patient
 	{
 		return("Temp:" +getTemperature()+" Aches:"+getAches()+" SoreThroat:"+getSoreThroat()+" Tonsilitis: "+getTonsillitis());
 	}
-
 	
 //GETTERS AND SETTERS/////////////////
 	public String getTemperature() {

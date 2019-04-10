@@ -17,6 +17,25 @@ public class Calculations
 	int yesSoreCount = 0;
 	int noSoreCount = 0;
 	
+	int yesTonsillitisCount = 0;
+	int noTonsillitisCount = 0;
+	//////////////////////////////////////////
+	String Temp = "Hot";
+	String Aches = "Yes";
+	String Sore = "Yes";
+	
+	int CoolAndTS;
+	int NormAndTS;
+	int HotAndTS;
+	int AchesAndTS;
+	int SoreAndTS;
+	
+	int CoolNoTS;
+	int NormNoTS;
+	int HotNoTS;
+	int AchesNoTS;
+	int SoreNoTS;
+	
 	
 	//Constructor//////////
 	public Calculations()
@@ -25,10 +44,11 @@ public class Calculations
 		
 		patientsCount = f1.getTestCaseList().size();//
 		
-		for(int i=0; i <  f1.getTestCaseList().size(); i++)
+		for(int i=0; i <  f1.getTestCaseList().size(); i++)//count all the values in every object
 		{
+			
 			//Temps
-			if(f1.getTestCase(i).getTemperature().contentEquals("Cool"))
+			if(f1.getTestCase(i).getTemperature().contentEquals("Cool"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 			{
 				coolTempCount++;
 			}
@@ -60,8 +80,49 @@ public class Calculations
 			{
 				noSoreCount++;
 			}	
+			
+			if(f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))
+			{
+				yesTonsillitisCount++;
+			}
+			else if(f1.getTestCase(i).getTonsillitis().contentEquals("No"))
+			{
+				noTonsillitisCount++;
+			}	
+			
+			//------------------
+			
+			
+			//Find prob of aches when have tonsillitis
+			if(f1.getTestCase(i).getTemperature().contentEquals("Cool") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+			{
+				CoolAndTS++;
+			}
+			else if(f1.getTestCase(i).getTemperature().contentEquals("Normal") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+			{
+				NormAndTS++;
+			}
+			else if(f1.getTestCase(i).getTemperature().contentEquals("Hot") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+			{
+				HotAndTS++;
+			}
+			
+			if(f1.getTestCase(i).getAches().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+			{
+				AchesAndTS++;
+			}
+			
+			if(f1.getTestCase(i).getSoreThroat().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+			{
+				SoreAndTS++;
+			}
 		}
-		
+		System.out.println("cool: "+CoolAndTS);
+		System.out.println("norm: "+NormAndTS);
+		System.out.println("hot: "+HotAndTS);
+		System.out.println("aches: "+AchesAndTS);
+		System.out.println("sore: "+SoreAndTS);
+/*		
 		System.out.println("Patients: "+patientsCount);
 		System.out.println("coolTempCount: "+coolTempCount);
 		System.out.println("normTempCount: "+normTempCount);
@@ -70,7 +131,7 @@ public class Calculations
 		System.out.println("noAchesCount: "+noAchesCount);
 		System.out.println("yesSoreCount: "+yesSoreCount);
 		System.out.println("noSoreCount: "+noSoreCount);
-		
+*/	
 	}
 
 }
@@ -95,5 +156,11 @@ P(no aches) = 7/18
 P(sore throat) = 10/18
 P(no sore)= 8/18
 
+
+So the formula for probability of having TS:
+all(probability of sympton given TS)(has TS/all patients) = x
+all(probability of sympton given no TS)(not have TS/all patients) = y
+x + y = z
+x/z = probability of having
 
 */
