@@ -36,8 +36,6 @@ public class Gui extends JFrame implements ActionListener
 	JRadioButton b5;
 	JRadioButton b6;
 	JRadioButton b7;
-	JRadioButton b8;
-	JRadioButton b9;
 	
 //Constructor////////////////////
 	public Gui()//Construct
@@ -54,7 +52,6 @@ public class Gui extends JFrame implements ActionListener
 	    JPanel gridPanel = new JPanel();//For grid of inputs
 	    JPanel fillerPanel1 = new JPanel();
 	    JPanel fillerPanel2 = new JPanel();
-	    JPanel fillerPanel3 = new JPanel();
 	    
 	    //The buttons for selecting symptoms
 	    b1 = new JRadioButton("Cold");  
@@ -63,9 +60,7 @@ public class Gui extends JFrame implements ActionListener
 	    b4 = new JRadioButton("Yes");  
 	    b5 = new JRadioButton("No"); 
 	    b6 = new JRadioButton("Yes");  
-	    b7 = new JRadioButton("No");  
-	    b8 = new JRadioButton("Yes");  
-	    b9 = new JRadioButton("No");
+	    b7 = new JRadioButton("No"); 
 	    submitB = new JButton("Submit");
 	    submitB.addActionListener(this);
 	    
@@ -73,13 +68,11 @@ public class Gui extends JFrame implements ActionListener
 	    JLabel l1 = new JLabel("Temperature:  ");
 	    JLabel l2 = new JLabel("Aches:  ");
 	    JLabel l3 = new JLabel("Sore Throat:  ");
-	    JLabel l4 = new JLabel("Tonsillitis:  ");
 	    
 	    //Button Group to make only one selectable
 	    ButtonGroup tempGroup = new ButtonGroup();
 	    ButtonGroup acheGroup = new ButtonGroup();
 	    ButtonGroup throatGroup = new ButtonGroup();
-	    ButtonGroup tonsGroup = new ButtonGroup();
 	    
 	//Add/////
 	    frame.add(panel1);//add panel1 to frame
@@ -94,7 +87,6 @@ public class Gui extends JFrame implements ActionListener
 		gridPanel.add(l1); gridPanel.add(b1); gridPanel.add(b2); gridPanel.add(b3);
 		gridPanel.add(l2); gridPanel.add(b4); gridPanel.add(b5); gridPanel.add(fillerPanel1);
 		gridPanel.add(l3); gridPanel.add(b6); gridPanel.add(b7); gridPanel.add(fillerPanel2);
-		gridPanel.add(l4); gridPanel.add(b8); gridPanel.add(b9); gridPanel.add(fillerPanel3);
 		
 		//Put radio buttons in group
 		tempGroup.add(b1);
@@ -104,8 +96,6 @@ public class Gui extends JFrame implements ActionListener
 	    acheGroup.add(b5);
 	    throatGroup.add(b6);
 	    throatGroup.add(b7);
-	    tonsGroup.add(b8);
-	    tonsGroup.add(b9);
 	    
 	//Edit/////
 	    //Frame
@@ -114,7 +104,7 @@ public class Gui extends JFrame implements ActionListener
 	    frame.setLayout(new GridLayout(4,1));//grid layout of rows, columns 
 	    
 	    //Input grid settings
-	    gridPanel.setLayout(new GridLayout(4,4));
+	    gridPanel.setLayout(new GridLayout(3,4));
 	  
 	    //Panels 
 	    /*
@@ -131,7 +121,6 @@ public class Gui extends JFrame implements ActionListener
 	    l1.setFont(fontB);
 	    l2.setFont(fontB);
 	    l3.setFont(fontB);
-	    l4.setFont(fontB);
 	    b1.setFont(font);
 	    b2.setFont(font);
 	    b3.setFont(font);
@@ -139,8 +128,6 @@ public class Gui extends JFrame implements ActionListener
 	    b5.setFont(font);
 	    b6.setFont(font);
 	    b7.setFont(font);
-	    b8.setFont(font);
-	    b9.setFont(font);
 	}  
 
 //Methods///////////
@@ -169,7 +156,7 @@ public class Gui extends JFrame implements ActionListener
 			}
 			else
 			{
-				incorrectInput = true;
+				incorrectInput = true;//If they didnt enter any value then dont run Probability check
 			}
 			
 			//Aches
@@ -202,7 +189,8 @@ public class Gui extends JFrame implements ActionListener
 			
 			if(incorrectInput == false)
 			{
-				Calculations c1 = new Calculations(inputTemp, inputAches, inputSore);
+				FindProbability c1 = new FindProbability(inputTemp, inputAches, inputSore);
+				JOptionPane.showMessageDialog(this, c1);
 			}
 			else if(incorrectInput == true)
 			{

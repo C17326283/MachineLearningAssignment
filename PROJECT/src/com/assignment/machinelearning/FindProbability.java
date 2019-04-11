@@ -2,7 +2,7 @@ package com.assignment.machinelearning;
 
 import java.util.ArrayList;
 
-public class Calculations 
+public class FindProbability 
 {
 	//Make variables//////////
 	float patientsCount = 0;
@@ -21,27 +21,32 @@ public class Calculations
 	String aches;
 	String sore;
 	
-	float ProbOfTS;
-	float ProbOfNotTS;
-	float z;
-	float ProbabilityOfTS;
-	float ProbabilityOfNotTS;
+	float yesTotal;
+	float noTotal;
+	float yesAndNoSum;
+	float probabilityOfHavingTS;
+	float probabilityOfNotHavingTS;
 	
 	//Constructor//////////
-	public Calculations(String temp, String aches, String sore)//Catches and currently renames
+	public FindProbability(String temp, String aches, String sore)//Catches and currently renames
 	{
 		this.temp = temp;
 		this.aches = aches;
 		this.sore = sore;
 		
+		countFile();
+		calculate();
+	}
+	
+	public void countFile()//Goes through file and counts up all the values needed based on user input
+	{
 		FileProcessor f1 = new FileProcessor();//Make instance//This makes an arraylist of patient objects to call from
-		
-		patientsCount = f1.getTestCaseList().size();//
+		patientsCount = f1.getTestCaseList().size();//How many lines in file is amount of patients made
 		
 		for(int i=0; i <  f1.getTestCaseList().size(); i++)//count all the values in every object
 		{
 			//amount of people with tonsillitis
-			if(f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))
+			if(f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//if tonsillitis column has yes
 			{
 				yesTonsillitisCount++;
 			}
@@ -54,6 +59,7 @@ public class Calculations
 			//Checks input so it can run the right code without using non relevant variables
 			if(temp == "Cool")
 			{
+				//If temp is cool and they have tonsillitis
 				if(f1.getTestCase(i).getTemperature().contentEquals("Cool") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
 					tempWithTS++;
@@ -134,32 +140,68 @@ public class Calculations
 				}
 			}
 		}//end for
+	}
+	public void calculate()
+	{
+		yesTotal = (tempWithTS/yesTonsillitisCount)*(achesWithTS/yesTonsillitisCount)*(soreWithTS/yesTonsillitisCount)*(yesTonsillitisCount/patientsCount);
+		noTotal = (tempWithoutTS/noTonsillitisCount)*(achesWithoutTS/noTonsillitisCount)*(soreWithoutTS/noTonsillitisCount)*(noTonsillitisCount/patientsCount);
+		yesAndNoSum = yesTotal + noTotal;
+		probabilityOfHavingTS = yesTotal / yesAndNoSum;
+		probabilityOfNotHavingTS = noTotal / yesAndNoSum;
 		
-		
-		ProbOfTS = (tempWithTS/yesTonsillitisCount)*(achesWithTS/yesTonsillitisCount)*(soreWithTS/yesTonsillitisCount)*(yesTonsillitisCount/patientsCount);
-		ProbOfNotTS = (tempWithoutTS/noTonsillitisCount)*(achesWithoutTS/noTonsillitisCount)*(soreWithoutTS/noTonsillitisCount)*(noTonsillitisCount/patientsCount);
-		z = ProbOfTS + ProbOfNotTS;
-		ProbabilityOfTS = ProbOfTS / z;
-		ProbabilityOfNotTS = ProbOfNotTS / z;
-		
+		//Prints for testing
 		System.out.println("yesTonsillitisCount: "+yesTonsillitisCount+"\n");
 		
-		System.out.println("TempWithTS: "+tempWithTS+"/"+yesTonsillitisCount+"="+tempWithTS/yesTonsillitisCount);
-		System.out.println("AchesWithTS: "+achesWithTS+"/"+yesTonsillitisCount+"="+achesWithTS/yesTonsillitisCount);
-		System.out.println("SoreWithTS: "+soreWithTS+"/"+yesTonsillitisCount+"="+soreWithTS/yesTonsillitisCount+"\n");
+		System.out.println("TempWithTSProb: "+tempWithTS+"/"+yesTonsillitisCount+" = "+tempWithTS/yesTonsillitisCount);
+		System.out.println("AchesWithTSProb: "+achesWithTS+"/"+yesTonsillitisCount+" = "+achesWithTS/yesTonsillitisCount);
+		System.out.println("SoreWithTSProb: "+soreWithTS+"/"+yesTonsillitisCount+" = "+soreWithTS/yesTonsillitisCount+"\n");
 		
-		System.out.println("TempWithoutTS: "+tempWithoutTS+"/"+noTonsillitisCount+"="+tempWithoutTS/noTonsillitisCount);
-		System.out.println("AchesWithoutTS: "+achesWithoutTS+"/"+noTonsillitisCount+"="+achesWithoutTS/noTonsillitisCount);
-		System.out.println("SoreWithoutTS: "+soreWithoutTS+"/"+noTonsillitisCount+"="+soreWithoutTS/noTonsillitisCount+"\n");
+		System.out.println("TempWithoutTSProb: "+tempWithoutTS+"/"+noTonsillitisCount+" = "+tempWithoutTS/noTonsillitisCount);
+		System.out.println("AchesWithoutTSProb: "+achesWithoutTS+"/"+noTonsillitisCount+" = "+achesWithoutTS/noTonsillitisCount);
+		System.out.println("SoreWithoutTSProb: "+soreWithoutTS+"/"+noTonsillitisCount+" = "+soreWithoutTS/noTonsillitisCount+"\n");
 		
-		System.out.println("ProbOfTS: "+ProbOfTS);
-		System.out.println("ProbOfNotTS: "+ProbOfNotTS);
+		System.out.println("yesTotal: "+yesTotal);
+		System.out.println("noTotal: "+noTotal);
 		
-		System.out.println("Probs added together: "+z+"\n");
+		System.out.println("yesAndNoSum: "+yesAndNoSum+"\n");
 		
-		System.out.println("Probability of TS: "+ProbabilityOfTS);
-		System.out.println("Probability of not TS: "+ProbabilityOfNotTS);
+		System.out.println("probabilityOfHavingTS: "+probabilityOfHavingTS);
+		System.out.println("probabilityOfNotHavingTS: "+probabilityOfNotHavingTS);
 	}
+	
+	public String toString()
+	{
+		String result = ("Probability of having Tonsillitis: " + probabilityOfHavingTS +"\nProbability of not having Tonsillitis: "+probabilityOfNotHavingTS);
+		return result;
+	}
+
+	
+	
+//GETTERS AND SETTERS////////
+	public String getTemp() {
+		return temp;
+	}
+
+	public void setTemp(String temp) {
+		this.temp = temp;
+	}
+
+	public String getAches() {
+		return aches;
+	}
+
+	public void setAches(String aches) {
+		this.aches = aches;
+	}
+
+	public String getSore() {
+		return sore;
+	}
+
+	public void setSore(String sore) {
+		this.sore = sore;
+	}
+	
 }
 
 /*

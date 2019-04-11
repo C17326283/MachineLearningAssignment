@@ -19,6 +19,5 @@ public class Control
 	{	
 		Gui screen1 = new Gui();//Make an instance of the gui to use it
 		FileProcessor f1 = new FileProcessor();//fills TestCaseList() with stuff from file
-		
 	}
 }
