@@ -33,7 +33,7 @@ public class FindProbability
 		this.temp = temp;
 		this.aches = aches;
 		this.sore = sore;
-		
+		System.out.print("\n\ntemp is"+this.temp+"     aches is"+aches+"    sore is"+sore);
 		countFile();
 		calculate();
 	}
@@ -43,11 +43,13 @@ public class FindProbability
 		FileProcessor f1 = new FileProcessor();//Make instance//This makes an arraylist of patient objects to call from
 		patientsCount = f1.getTestCaseList().size();//How many lines in file is amount of patients made
 		
+		
 		for(int i=0; i <  f1.getTestCaseList().size(); i++)//count all the values in every object
 		{
 			//amount of people with tonsillitis
 			if(f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//if tonsillitis column has yes
 			{
+//works				
 				yesTonsillitisCount++;
 			}
 			else if(f1.getTestCase(i).getTonsillitis().contentEquals("No"))
@@ -57,8 +59,12 @@ public class FindProbability
 			
 			//TEMPS
 			//Checks input so it can run the right code without using non relevant variables
-			if(temp == "Cool")
+			System.out.print("\n\ntemp be: "+temp);
+			System.out.print("\ncase i get temp be: "+f1.getTestCase(i).getTemperature());
+			
+			if(temp.equals("Cool"))
 			{
+				System.out.print("\n\ndoes find cool\n\n");
 				//If temp is cool and they have tonsillitis
 				if(f1.getTestCase(i).getTemperature().contentEquals("Cool") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
@@ -69,8 +75,9 @@ public class FindProbability
 					tempWithoutTS++;
 				}
 			}
-			else if(temp == "Normal")
+			else if(temp.equals("Normal"))
 			{
+				System.out.print("\n\ndoes find normal\n\n");
 				if(f1.getTestCase(i).getTemperature().contentEquals("Normal") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
 					tempWithTS++;
@@ -80,8 +87,9 @@ public class FindProbability
 					tempWithoutTS++;
 				}
 			}
-			else if(temp == "Hot")
+			else if(temp.equals("Hot"))
 			{
+				System.out.print("\n\ndoes find hot\n\n");
 				if(f1.getTestCase(i).getTemperature().contentEquals("Hot") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
 					tempWithTS++;
@@ -93,7 +101,7 @@ public class FindProbability
 			}
 			
 			//ACHES
-			if(aches == "Yes")
+			if(aches.equals("Yes"))
 			{
 				if(f1.getTestCase(i).getAches().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
@@ -104,7 +112,7 @@ public class FindProbability
 					achesWithoutTS++;
 				}
 			}
-			else if(aches == "No")
+			else if(aches.equals("No"))
 			{
 				if(f1.getTestCase(i).getAches().contentEquals("No") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
@@ -117,7 +125,7 @@ public class FindProbability
 			}
 			
 			//SORE THROAT
-			if(sore == "Yes")
+			if(sore.equals("Yes"))
 			{
 				if(f1.getTestCase(i).getSoreThroat().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
@@ -128,7 +136,7 @@ public class FindProbability
 					soreWithoutTS++;
 				}
 			}
-			else if(sore == "No")
+			else if(sore.equals("No"))
 			{
 				if(f1.getTestCase(i).getSoreThroat().contentEquals("No") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
@@ -168,10 +176,11 @@ public class FindProbability
 		System.out.println("probabilityOfHavingTS: "+probabilityOfHavingTS);
 		System.out.println("probabilityOfNotHavingTS: "+probabilityOfNotHavingTS);
 	}
+
 	
 	public String toString()
 	{
-		String result = ("Probability of having Tonsillitis: " + probabilityOfHavingTS +"\nProbability of not having Tonsillitis: "+probabilityOfNotHavingTS);
+		String result = ("Probability of having Tonsillitis: " + Math.round(probabilityOfHavingTS*100)+"%" +"\nProbability of not having Tonsillitis: "+Math.round(probabilityOfNotHavingTS*100)+"%");
 		return result;
 	}
 
@@ -201,6 +210,16 @@ public class FindProbability
 	public void setSore(String sore) {
 		this.sore = sore;
 	}
+
+	public float getProbabilityOfHavingTS() {
+		return probabilityOfHavingTS;
+	}
+
+	public void setProbabilityOfHavingTS(float probabilityOfHavingTS) {
+		this.probabilityOfHavingTS = probabilityOfHavingTS;
+	}
+	
+	
 	
 }
 

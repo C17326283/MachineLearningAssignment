@@ -189,8 +189,8 @@ public class Gui extends JFrame implements ActionListener
 			
 			if(incorrectInput == false)
 			{
-				FindProbability c1 = new FindProbability(inputTemp, inputAches, inputSore);
-				JOptionPane.showMessageDialog(this, c1);
+				FindProbability p1 = new FindProbability(inputTemp, inputAches, inputSore);
+				JOptionPane.showMessageDialog(this, p1);
 			}
 			else if(incorrectInput == true)
 			{

@@ -34,6 +34,7 @@ public class FileProcessor
 				
 				testCaseList.add(new Patient(word[0], word[1], word[2], word[3]));//Make a new object of Patient with the contents of a line and add it the array list
 			}
+			myScanner.close();
 		}
 		catch (FileNotFoundException e) //If file problem
 		{
