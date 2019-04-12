@@ -33,68 +33,65 @@ public class FindProbability
 		this.temp = temp;
 		this.aches = aches;
 		this.sore = sore;
-		System.out.print("\n\ntemp is"+this.temp+"     aches is"+aches+"    sore is"+sore);
 		countFile();
 		calculate();
 	}
 	
 	public void countFile()//Goes through file and counts up all the values needed based on user input
 	{
+		//Need to reset all values
+		
+		
+		
+		
 		FileProcessor f1 = new FileProcessor();//Make instance//This makes an arraylist of patient objects to call from
-		patientsCount = f1.getTestCaseList().size();//How many lines in file is amount of patients made
+		patientsCount = f1.getTrainingCaseList().size();//How many lines in file is amount of patients made
 		
 		
-		for(int i=0; i <  f1.getTestCaseList().size(); i++)//count all the values in every object
+		for(int i=0; i <  f1.getTrainingCaseList().size(); i++)//count all the values in every object
 		{
 			//amount of people with tonsillitis
-			if(f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//if tonsillitis column has yes
+			if(f1.getTrainingCase(i).getTonsillitis().contentEquals("Yes"))//if tonsillitis column has yes
 			{
-//works				
 				yesTonsillitisCount++;
 			}
-			else if(f1.getTestCase(i).getTonsillitis().contentEquals("No"))
+			else if(f1.getTrainingCase(i).getTonsillitis().contentEquals("No"))
 			{
 				noTonsillitisCount++;
 			}	
 			
 			//TEMPS
 			//Checks input so it can run the right code without using non relevant variables
-			System.out.print("\n\ntemp be: "+temp);
-			System.out.print("\ncase i get temp be: "+f1.getTestCase(i).getTemperature());
-			
-			if(temp.equals("Cool"))
+			if(temp.equals("Cool"))//get rid of this stupeeed
 			{
-				System.out.print("\n\ndoes find cool\n\n");
 				//If temp is cool and they have tonsillitis
-				if(f1.getTestCase(i).getTemperature().contentEquals("Cool") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				if(f1.getTrainingCase(i).getTemperature().contentEquals("Cool") && f1.getTrainingCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
 					tempWithTS++;
 				}
-				else if(f1.getTestCase(i).getTemperature().contentEquals("Cool") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				else if(f1.getTrainingCase(i).getTemperature().contentEquals("Cool") && f1.getTrainingCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
 					tempWithoutTS++;
 				}
 			}
 			else if(temp.equals("Normal"))
 			{
-				System.out.print("\n\ndoes find normal\n\n");
-				if(f1.getTestCase(i).getTemperature().contentEquals("Normal") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				if(f1.getTrainingCase(i).getTemperature().contentEquals("Normal") && f1.getTrainingCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
 					tempWithTS++;
 				}
-				else if(f1.getTestCase(i).getTemperature().contentEquals("Normal") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				else if(f1.getTrainingCase(i).getTemperature().contentEquals("Normal") && f1.getTrainingCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
 					tempWithoutTS++;
 				}
 			}
 			else if(temp.equals("Hot"))
 			{
-				System.out.print("\n\ndoes find hot\n\n");
-				if(f1.getTestCase(i).getTemperature().contentEquals("Hot") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				if(f1.getTrainingCase(i).getTemperature().contentEquals("Hot") && f1.getTrainingCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
 					tempWithTS++;
 				}
-				else if(f1.getTestCase(i).getTemperature().contentEquals("Hot") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				else if(f1.getTrainingCase(i).getTemperature().contentEquals("Hot") && f1.getTrainingCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
 					tempWithoutTS++;
 				}
@@ -103,22 +100,22 @@ public class FindProbability
 			//ACHES
 			if(aches.equals("Yes"))
 			{
-				if(f1.getTestCase(i).getAches().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				if(f1.getTrainingCase(i).getAches().contentEquals("Yes") && f1.getTrainingCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
 					achesWithTS++;
 				}
-				else if(f1.getTestCase(i).getAches().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				else if(f1.getTrainingCase(i).getAches().contentEquals("Yes") && f1.getTrainingCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
 					achesWithoutTS++;
 				}
 			}
 			else if(aches.equals("No"))
 			{
-				if(f1.getTestCase(i).getAches().contentEquals("No") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				if(f1.getTrainingCase(i).getAches().contentEquals("No") && f1.getTrainingCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
 					achesWithTS++;
 				}
-				else if(f1.getTestCase(i).getAches().contentEquals("No") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				else if(f1.getTrainingCase(i).getAches().contentEquals("No") && f1.getTrainingCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
 					achesWithoutTS++;
 				}
@@ -127,28 +124,29 @@ public class FindProbability
 			//SORE THROAT
 			if(sore.equals("Yes"))
 			{
-				if(f1.getTestCase(i).getSoreThroat().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				if(f1.getTrainingCase(i).getSoreThroat().contentEquals("Yes") && f1.getTrainingCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
 					soreWithTS++;
 				}
-				else if(f1.getTestCase(i).getSoreThroat().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				else if(f1.getTrainingCase(i).getSoreThroat().contentEquals("Yes") && f1.getTrainingCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
 					soreWithoutTS++;
 				}
 			}
 			else if(sore.equals("No"))
 			{
-				if(f1.getTestCase(i).getSoreThroat().contentEquals("No") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				if(f1.getTrainingCase(i).getSoreThroat().contentEquals("No") && f1.getTrainingCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
 					soreWithTS++;
 				}
-				else if(f1.getTestCase(i).getSoreThroat().contentEquals("No") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
+				else if(f1.getTrainingCase(i).getSoreThroat().contentEquals("No") && f1.getTrainingCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 				{
 					soreWithoutTS++;
 				}
 			}
 		}//end for
 	}
+	
 	public void calculate()
 	{
 		yesTotal = (tempWithTS/yesTonsillitisCount)*(achesWithTS/yesTonsillitisCount)*(soreWithTS/yesTonsillitisCount)*(yesTonsillitisCount/patientsCount);
@@ -158,7 +156,7 @@ public class FindProbability
 		probabilityOfNotHavingTS = noTotal / yesAndNoSum;
 		
 		//Prints for testing
-		System.out.println("yesTonsillitisCount: "+yesTonsillitisCount+"\n");
+/*		System.out.println("yesTonsillitisCount: "+yesTonsillitisCount+"\n");
 		
 		System.out.println("TempWithTSProb: "+tempWithTS+"/"+yesTonsillitisCount+" = "+tempWithTS/yesTonsillitisCount);
 		System.out.println("AchesWithTSProb: "+achesWithTS+"/"+yesTonsillitisCount+" = "+achesWithTS/yesTonsillitisCount);
@@ -175,7 +173,7 @@ public class FindProbability
 		
 		System.out.println("probabilityOfHavingTS: "+probabilityOfHavingTS);
 		System.out.println("probabilityOfNotHavingTS: "+probabilityOfNotHavingTS);
-	}
+*/	}
 
 	
 	public String toString()
