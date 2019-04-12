@@ -51,6 +51,7 @@ public class FileProcessor
 	    return trainingCaseList;//Returns the list of all the patients made.
     }
     
+    
     void closeFile()
     {
     	//Close the file so it cant be read from anymore

@@ -14,7 +14,9 @@ public class Control
 		Gui screen1 = new Gui();//Make an instance of the gui to use it
 		
 		FindProbability p1 = new FindProbability("Hot", "Yes", "Yes");
-		System.out.print(p1);
+		System.out.println(p1);
+		
+		p1.FindAccuracy();
 		//Make object add name, open, read list and get back arraylist of patients, close
 /*		FileProcessor fp = new FileProcessor("src\\com\\assignment\\machinelearning\\TestCases.csv");//Constructs a fileprocessor object which just assigns the filename
 		fp.openFile();
