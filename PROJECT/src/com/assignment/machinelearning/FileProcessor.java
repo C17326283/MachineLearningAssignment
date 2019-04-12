@@ -32,7 +32,7 @@ public class FileProcessor
 	//Reads through file and returns an arraylist of patient objects containing symptoms
     ArrayList<Patient> readFile()
     {
-	    try
+	    try//Need a try incase file is not found then it gives an error, uses catch and it warns user
 		{
 	    	myScanner = new Scanner(fileData); //Scanner reads the actuall content of the file.
 	    	
@@ -46,9 +46,9 @@ public class FileProcessor
 		}
 		catch (FileNotFoundException e)
 		{
-			System.out.println("FileProcessor Error: " + e.getMessage());
+			System.out.println("FileProcessor Error: " + e.getMessage());//Display error message
 		}
-	    return trainingCaseList;
+	    return trainingCaseList;//Returns the list of all the patients made.
     }
     
     void closeFile()
@@ -56,4 +56,18 @@ public class FileProcessor
     	//Close the file so it cant be read from anymore
 		 myScanner.close();
     }
+
+    
+//GETTERS AND SETTERS///////////////
+	public ArrayList<Patient> getTrainingCaseList()//For getting the list of objects
+	{
+		return trainingCaseList;
+	}
+
+	public void setTrainingCaseList(ArrayList<Patient> trainingCaseList)
+	{
+		this.trainingCaseList = trainingCaseList;
+	}
+    
+    
 }

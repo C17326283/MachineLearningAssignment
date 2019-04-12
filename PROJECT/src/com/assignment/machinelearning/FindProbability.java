@@ -1,31 +1,33 @@
-/*package com.assignment.machinelearning;
+package com.assignment.machinelearning;
 
 import java.util.ArrayList;
 
 public class FindProbability 
 {
 	//Make variables//////////
-	float patientsCount = 0;
+	float patientsCount = 0;//the amount of training patients
 	
-	float yesTonsillitisCount = 0;
-	float noTonsillitisCount = 0;
+	float yesTonsillitisCount = 0;//People with tonsillitis
+	float noTonsillitisCount = 0;//People without tonsillitis
 	
-	float tempWithTS;
-	float tempWithoutTS;
-	float achesWithTS;
-	float achesWithoutTS;
-	float soreWithTS;
-	float soreWithoutTS;
-	//Sample patient for testing
-	String temp;
+	float tempWithTS;//Have temperature and Tonsillitis
+	float achesWithTS;//Have aches and Tonsillitis
+	float soreWithTS;//Have sore throat and Tonsillitis
+	float tempWithoutTS;//Have temperature and dont have Tonsillitis
+	float achesWithoutTS;//Have aches and dont have Tonsillitis
+	float soreWithoutTS;//Have sore throat and dont have Tonsillitis
+
+	String temp;//The inputed symptoms
 	String aches;
 	String sore;
 	
-	float yesTotal;
-	float noTotal;
-	float yesAndNoSum;
-	float probabilityOfHavingTS;
-	float probabilityOfNotHavingTS;
+	float yesTotal;//The multiplication of each entered symptoms likliness to cause tonsillitis by how many people have it out of everyone
+	float noTotal;//The multiplication of each entered symptoms likliness not to cause tonsillitis by how many people dont have it out of everyone
+	float yesAndNoSum;//Adding the two likliness's of having and not having, used to multiply
+	float probabilityOfHavingTS;//Multipication of yesTotal by yesAndNoSum. gives percent chance of having
+	float probabilityOfNotHavingTS;//Multipication of noTotal by yesAndNoSum.  gives percent chance of nopthaving
+	
+	ArrayList<Patient> trainingCaseList = new ArrayList<Patient>();//Make arraylist to store all the patient objects
 	
 	//Constructor//////////
 	public FindProbability(String temp, String aches, String sore)//Catches and currently renames
@@ -34,110 +36,60 @@ public class FindProbability
 		this.aches = aches;
 		this.sore = sore;
 		
-		countFile();
-		calculate();
+		FileProcessor fp = new FileProcessor("src\\com\\assignment\\machinelearning\\TestCases.csv");//Constructs a fileprocessor object which just assigns the filename
+		fp.openFile();
+		trainingCaseList = fp.readFile();//fills arraylist from file. make new one here instead of calling across classes
+		fp.closeFile();
+		
+		countFile();//Fills all the neccesary variables with the number of times it showed up in the file//In gui because always do
+		calculate();//Uses the counts to calculate the chances of having and not having Tonsillitis
 	}
 	
 	public void countFile()//Goes through file and counts up all the values needed based on user input
 	{
-		FileProcessor f1 = new FileProcessor();//Make instance//This makes an arraylist of patient objects to call from
-		patientsCount = f1.getTestCaseList().size();//How many lines in file is amount of patients made
+		patientsCount = trainingCaseList.size();//How many lines in file is amount of patients made
 		
-		for(int i=0; i <  f1.getTestCaseList().size(); i++)//count all the values in every object
+		for(int i=0; i <  trainingCaseList.size(); i++)//count all the values in every object//TCL.size just returns the amount of lines in arraylist
 		{
 			//amount of people with tonsillitis
-			if(f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//if tonsillitis column has yes
+			if(trainingCaseList.get(i).getTonsillitis().contentEquals("Yes"))//if tonsillitis column has yes
 			{
 				yesTonsillitisCount++;
 			}
-			else if(f1.getTestCase(i).getTonsillitis().contentEquals("No"))
+			else if(trainingCaseList.get(i).getTonsillitis().contentEquals("No"))
 			{
 				noTonsillitisCount++;
 			}	
 			
 			//TEMPS
-			//Checks input so it can run the right code without using non relevant variables
-			if(temp == "Cool")
+			//If input matches column in table and they have tonsillitis//only trying to get the inputed temps where they have tonsillitis out of all people with tonsillitis
+			if(trainingCaseList.get(i).getTemperature().contentEquals(temp) && trainingCaseList.get(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 			{
-				//If temp is cool and they have tonsillitis
-				if(f1.getTestCase(i).getTemperature().contentEquals("Cool") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
-				{
-					tempWithTS++;
-				}
-				else if(f1.getTestCase(i).getTemperature().contentEquals("Cool") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
-				{
-					tempWithoutTS++;
-				}
+				tempWithTS++;
 			}
-			else if(temp == "Normal")
+			else if(trainingCaseList.get(i).getTemperature().contentEquals(temp) && trainingCaseList.get(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 			{
-				if(f1.getTestCase(i).getTemperature().contentEquals("Normal") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
-				{
-					tempWithTS++;
-				}
-				else if(f1.getTestCase(i).getTemperature().contentEquals("Normal") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
-				{
-					tempWithoutTS++;
-				}
-			}
-			else if(temp == "Hot")
-			{
-				if(f1.getTestCase(i).getTemperature().contentEquals("Hot") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
-				{
-					tempWithTS++;
-				}
-				else if(f1.getTestCase(i).getTemperature().contentEquals("Hot") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
-				{
-					tempWithoutTS++;
-				}
+				tempWithoutTS++;
 			}
 			
 			//ACHES
-			if(aches == "Yes")
+			if(trainingCaseList.get(i).getAches().contentEquals(aches) && trainingCaseList.get(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 			{
-				if(f1.getTestCase(i).getAches().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
-				{
-					achesWithTS++;
-				}
-				else if(f1.getTestCase(i).getAches().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
-				{
-					achesWithoutTS++;
-				}
+				achesWithTS++;//aches is not yes aches its just the inputed result for aches
 			}
-			else if(aches == "No")
+			else if(trainingCaseList.get(i).getAches().contentEquals(aches) && trainingCaseList.get(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 			{
-				if(f1.getTestCase(i).getAches().contentEquals("No") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
-				{
-					achesWithTS++;
-				}
-				else if(f1.getTestCase(i).getAches().contentEquals("No") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
-				{
-					achesWithoutTS++;
-				}
+				achesWithoutTS++;
 			}
 			
 			//SORE THROAT
-			if(sore == "Yes")
+			if(trainingCaseList.get(i).getSoreThroat().contentEquals(sore) && trainingCaseList.get(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 			{
-				if(f1.getTestCase(i).getSoreThroat().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
-				{
-					soreWithTS++;
-				}
-				else if(f1.getTestCase(i).getSoreThroat().contentEquals("Yes") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
-				{
-					soreWithoutTS++;
-				}
+				soreWithTS++;
 			}
-			else if(sore == "No")
+			else if(trainingCaseList.get(i).getSoreThroat().contentEquals(sore) && trainingCaseList.get(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
 			{
-				if(f1.getTestCase(i).getSoreThroat().contentEquals("No") && f1.getTestCase(i).getTonsillitis().contentEquals("Yes"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
-				{
-					soreWithTS++;
-				}
-				else if(f1.getTestCase(i).getSoreThroat().contentEquals("No") && f1.getTestCase(i).getTonsillitis().contentEquals("No"))//get single object(f1.getTestCase(i)) of testcase  then get temp and check if it says the word
-				{
-					soreWithoutTS++;
-				}
+				soreWithoutTS++;
 			}
 		}//end for
 	}
@@ -171,11 +123,9 @@ public class FindProbability
 	
 	public String toString()
 	{
-		String result = ("Probability of having Tonsillitis: " + probabilityOfHavingTS +"\nProbability of not having Tonsillitis: "+probabilityOfNotHavingTS);
+		String result = ("Probability of having Tonsillitis: " + Math.round(probabilityOfHavingTS*100)+"%"+"\nProbability of not having Tonsillitis: "+Math.round(probabilityOfNotHavingTS*100));
 		return result;
 	}
-
-	
 	
 //GETTERS AND SETTERS////////
 	public String getTemp() {
@@ -201,23 +151,16 @@ public class FindProbability
 	public void setSore(String sore) {
 		this.sore = sore;
 	}
-	
 }
-*/
+
 /*
 Naive bayes considers each feature independently(naive) to find a probability
 uses the maximum likelihood
 P(A|B) probability A occurs given that b is true
 P(A) and  P(B) seperate probabilities of each
-first get the probability of all yes's and no's 
+first get the probability of all yes's and no's whiel they have tonsillitis or and then not
 In sample data: 18 patient
-P(cool temp) = 5/18
-P(hot temp) =5/18
-P(normal temp =8/18
-P(have aches) = 11 / 18
-P(no aches) = 7/18
-P(sore throat) = 10/18
-P(no sore)= 8/18
+
 So the formula for probability of having TS:
 all(probability of sympton given TS)(has TS/all patients) = x
 all(probability of sympton given no TS)(not have TS/all patients) = y

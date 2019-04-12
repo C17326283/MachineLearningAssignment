@@ -1,6 +1,5 @@
  package com.assignment.machinelearning;
 
-import javax.swing.JOptionPane;
 
 public class Patient 
 {
@@ -13,7 +12,6 @@ public class Patient
 //Constructor/////////
 	public Patient(String temperature, String aches, String soreThroat, String tonsillitis)
 	{
-		//use getters and setters
 		this.setTemperature(temperature);
 		this.setAches(aches);
 		this.setSoreThroat(soreThroat);
