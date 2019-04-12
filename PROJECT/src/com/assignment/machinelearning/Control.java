@@ -17,13 +17,14 @@ public class Control
 {
 	public static void main(String[] args)
 	{	
-		Gui screen1 = new Gui();//Make an instance of the gui to use it
-		FileProcessor f1 = new FileProcessor();//fills TestCaseList() with stuff from file
-	
-//		AccuracyChecker a1 = new AccuracyChecker();
-
-		FileProcessor f2 = new FileProcessor();
-		AccuracyChecker a1 = new AccuracyChecker();
+//		Gui screen1 = new Gui();//Make an instance of the gui to use it
 		
+		
+		//Make object add name, open, read list and get back arraylist of patients, close
+		FileProcessor fp = new FileProcessor("src\\com\\assignment\\machinelearning\\TestCases.csv");//Constructs a fileprocessor object which just assigns the filename
+		fp.openFile();
+		System.out.print(fp.readFile());
+		fp.closeFile();
+	
 	}
 }
