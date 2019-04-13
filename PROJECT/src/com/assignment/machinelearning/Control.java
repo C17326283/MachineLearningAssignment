@@ -11,7 +11,7 @@ public class Control
 {
 	public static void main(String[] args)
 	{	
-		Gui screen1 = new Gui();//Make an instance of the gui to use it
+		HomeGui homeGui = new HomeGui();//Make an instance of the gui to use it
 		
 		FindProbability p1 = new FindProbability("Hot", "Yes", "Yes");
 		System.out.println(p1);

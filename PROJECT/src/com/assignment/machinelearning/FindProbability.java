@@ -217,9 +217,6 @@ public class FindProbability
 
 	public void setSore(String sore) {
 		this.sore = sore;
-		
-		
-		
 	}
 
 	public float getProbabilityOfHavingTS() {
