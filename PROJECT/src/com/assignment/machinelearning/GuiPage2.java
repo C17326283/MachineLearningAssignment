@@ -9,6 +9,7 @@ import java.awt.Dimension;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,14 +24,16 @@ import com.sun.glass.events.WindowEvent;
 import java.util.ArrayList;
 import java.util.Random;
 import java.awt.Color;
+import java.awt.Component;
 
-public class HomeGui extends JFrame implements ActionListener
+public class GuiPage2 extends JFrame implements ActionListener
 {
 //Make all attributes//////////////////////////////////////////////////////////////
 	JFrame frame;
-	JButton submitB;
+	JButton page1Button;
+	JButton page2Button;
 //Constructor////////////////////
-	public HomeGui()//Construct
+	public GuiPage2()//Construct
 	{ 
 	//Make/////
 		//Make dirrectly instead of 
@@ -43,9 +46,16 @@ public class HomeGui extends JFrame implements ActionListener
 	    JPanel panel4 = new JPanel();
 	    
 	    //The buttons for selecting symptoms
-	    submitB = new JButton("Submit");
-	    submitB.addActionListener(this);
+	    page1Button = new JButton("Page 1");
+	    page1Button.addActionListener(this);
+	    page2Button = new JButton("Page 1");
+	    page2Button.addActionListener(this);
 	    
+	    
+	    ImageIcon logoImage = new ImageIcon("images\\testimg.PNG"); 
+	    JLabel logo = new JLabel(logoImage); 
+
+	    panel2.add(logo);
 	    
 	//Add/////
 	    frame.add(panel1);//add panel1 to frame
@@ -53,36 +63,46 @@ public class HomeGui extends JFrame implements ActionListener
 		frame.add(panel3);
 		frame.add(panel4);
 		
-		panel3.add(submitB);
+		panel3.add(page1Button);
+		panel3.add(page2Button);
+		
+		JButton testb1 = new JButton("Button 1");
+	    JButton testb2 = new JButton("2");
+	    JButton testb3 = new JButton("This is button three");
+	    testb1.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    
+		panel4.setLayout(new BoxLayout(panel4, BoxLayout.Y_AXIS));
+		panel4.add(testb1);
+		panel4.add(testb2);
+		panel4.add(testb3);
+		
 	    
 	//Edit/////
 	    //Frame
 	    frame.setSize(1000,1000);  
 	    frame.setVisible(true); 
 	    frame.setLayout(new GridLayout(4,1));//grid layout of rows, columns 
-	    frame.setLocation(200, 200);
+	    frame.setExtendedState(frame.MAXIMIZED_BOTH);//Open in fullscreen
+	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//Close properly
 	    
 	    //Set fonts for everything//Only set once so didnt use method
 	    Font fontB = new Font("Open Sans", Font.BOLD,24);//Make a font style
 	    Font font = new Font("Open Sans", Font.PLAIN,24);
-	    submitB.setFont(fontB);// apply the font style to all
+	    page1Button.setFont(fontB);// apply the font style to all
 	}  
 
 //Methods///////////
 	public void actionPerformed(ActionEvent EV)
 	{
-		if(EV.getSource() == submitB)//get source shows what functionality triggered it
+		if(EV.getSource() == page1Button)//get source shows what functionality triggered it
 		{
-			Gui gui = new Gui();
+			GuiSymptoms gui = new GuiSymptoms();
 			
-				try //Eclipse told me i needed a try
-				{
-					Thread.sleep(200);//Just make it wait so one window doesnt close before other opens//https://stackoverflow.com/questions/31904792/java-how-to-wait-1-second-in-a-gui
-				}
-				catch (InterruptedException e)
-				{
-					e.printStackTrace();
-				}
+			frame.dispose();
+		}
+		if(EV.getSource() == page2Button)//get source shows what functionality triggered it
+		{
+			GuiHome gui2 = new GuiHome();
 			frame.dispose();
 		}
 	}

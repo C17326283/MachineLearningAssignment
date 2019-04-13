@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.awt.Color;
 
-public class Gui extends JFrame implements ActionListener
+public class GuiSymptoms extends JFrame implements ActionListener
 {
 //Make all attributes//////////////////////////////////////////////////////////////
 
@@ -44,7 +44,7 @@ public class Gui extends JFrame implements ActionListener
 	JPanel panel4;
 	
 //Constructor////////////////////
-	public Gui()//Construct
+	public GuiSymptoms()//Construct
 	{ 
 	//Make/////
 		//Make dirrectly instead of 
@@ -70,6 +70,7 @@ public class Gui extends JFrame implements ActionListener
 	    submitB = new JButton("Submit");
 	    submitB.addActionListener(this);
 	    pb = new JProgressBar(0,100);
+	    pb.setVisible(false);
 	   
 	    
 	    
@@ -116,7 +117,8 @@ public class Gui extends JFrame implements ActionListener
 	    frame.setSize(1000,1000);  
 	    frame.setVisible(true); 
 	    frame.setLayout(new GridLayout(4,1));//grid layout of rows, columns 
-	    frame.setLocation(200, 200);
+	    frame.setExtendedState(frame.MAXIMIZED_BOTH);//Open in fullscreen
+	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//Close properly
 	    
 	    //Input grid settings
 	    gridPanel.setLayout(new GridLayout(3,4));
@@ -209,6 +211,7 @@ public class Gui extends JFrame implements ActionListener
 				panel4.add(l4,p1.FindAccuracy());//TODO make it only show after input.
 				panel4.add(pb);
 				pb.setValue((int)p1.FindAccuracy());
+				pb.setVisible(true);
 			}
 			else if(incorrectInput == true)
 			{

@@ -41,7 +41,7 @@ public class FindProbability
 		trainingCaseList = fp.readFile();//fills arraylist from file. make new one here instead of calling across classes
 		fp.closeFile();
 		
-		countFile();//Fills all the neccesary variables with the number of times it showed up in the file//In gui because always do
+		countList();//Fills all the neccesary variables with the number of times it showed up in the file//In gui because always do
 		calculate();//Uses the counts to calculate the chances of having and not having Tonsillitis
 	}
 	
@@ -75,7 +75,7 @@ public class FindProbability
 			aches = testingCaseList.get(i).getAches();
 			sore = testingCaseList.get(i).getSoreThroat();
 			
-			countFile();//Fills all the neccesary variables with the number of times it showed up in the training list//In gui because always do
+			countList();//Fills all the neccesary variables with the number of times it showed up in the training list//In gui because always do
 			calculate();//Uses the counts to calculate the chances of having and not having Tonsillitis based on 
 			
 			if(getProbabilityOfHavingTS() >= 50)//If the chance is over 50 then the machine thinks they have it
@@ -99,7 +99,7 @@ public class FindProbability
 		return Accuracy;
 	}
 	
-	public void countFile()//Goes through file and counts up all the values needed based on user input
+	public void countList()//Goes through file and counts up all the values needed based on user input
 	{
 		//Need to reset all variable 
 		patientsCount = 0;
