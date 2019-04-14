@@ -32,6 +32,4 @@ public class Control
 	{
 		Control.chosenFile = chosenFile;
 	}
-	
-	
 }
