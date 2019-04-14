@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.util.ArrayList;
@@ -22,26 +21,25 @@ import java.awt.Color;
 public class GuiFile extends JFrame implements ActionListener
 {
 //Make all attributes//////////////////////////////////////////////////////////////
-	JFrame frame;
+	private JFrame frame;
 	
-	JPanel panel1;//Main frame panels
-	JPanel panel2;                   
-	JPanel panel3;                   
-	JPanel panel4;//Need to declare because i want to hide before its needed
-	JPanel panel5;
+	private JPanel panel1;//Main frame panels
+	private JPanel panel2;                   
+	private JPanel panel3;                   
+	private JPanel panel4;//Need to declare because i want to hide before its needed
+
 	
-	JButton homeB;//Needs declaration for action event
-	JButton submitB;//Need to declare buttons so they can be accessed when making gui
-	JButton fileB;
+	private JButton homeB;//Needs declaration for action event
+	private JButton submitB;//Need to declare buttons so they can be accessed when making gui
+	private JButton fileB;
 	
-	Font fontBig;
-	Font fontBold;
-	Font font;
+	private Font fontBold;
+	private Font font;
 	
-	String resultsString;
-	JTextArea resultTextArea;
+	private String resultsString;
+	private JTextArea resultTextArea;
 	
-	JScrollPane scroll;//https://stackoverflow.com/questions/7766844/java-jscrollpane
+	private JScrollPane scroll;//https://stackoverflow.com/questions/7766844/java-jscrollpane
 	
 	static String chosenFile;
 	
@@ -51,25 +49,24 @@ public class GuiFile extends JFrame implements ActionListener
 	{ 
 	//MAKE and instantiate//////////
 		//Make dirrectly instead of 
-	    frame = new JFrame("Ryan Byrne Assignment");//The main window 
+	    frame = new JFrame("File selector");//The main window 
 	    
 	    //All the panels to go into the window
 	    panel1 = new JPanel();//Main frame panels
 	    panel2 = new JPanel();
 	    panel3 = new JPanel();
 	    panel4 = new JPanel();
-	    panel5 = new JPanel();
 	    
 	    JPanel homeBPanel = new JPanel();//Need to make a panel for home button so it doesnt fill the grid and i can still align it
 	    homeB = new JButton("Home");
 	    homeB.addActionListener(this);
 	    
-	    String instructions = new String("Click the buttons that match your symptoms and submit:");
-	    JLabel instructionsLabel  = new JLabel(instructions, SwingConstants.CENTER);//got swing constants from http://www.java2s.com/Code/Java/Swing-JFC/AsimpledemonstrationoftextalignmentinJLabels.htm
+	    JPanel filePathPanel = new JPanel();
+	    JLabel filePathLabel  = new JLabel("Current selected file is: "+Control.getChosenFile());//got swing constants from http://www.java2s.com/Code/Java/Swing-JFC/AsimpledemonstrationoftextalignmentinJLabels.htm
 	    
-	    JPanel fillerPanel1 = new JPanel();//to fill the spaces to make the input grid look right
+	    JPanel fillerPanel1 = new JPanel();//to fill the spaces
 	    JPanel fillerPanel2 = new JPanel();
-	    JPanel fillerPanel3 = new JPanel();//to fill the spaces to make the input grid look right
+	    JPanel fillerPanel3 = new JPanel();//to fill the spaces
 	    JPanel fillerPanel4 = new JPanel();
 	    
 	    //in panel 2//this triggers event causing other stuff to be made
@@ -97,7 +94,8 @@ public class GuiFile extends JFrame implements ActionListener
 		panel2.add(fillerPanel1);
 		filePanel.add(fileB);//Make panel so button doesn fill entire area
 		panel2.add(filePanel);
-		panel2.add(fillerPanel3);
+		filePathPanel.add(filePathLabel);
+		panel2.add(filePathPanel);
 		submitPanel.add(submitB);//Make panel so button doesn fill entire area
 		panel2.add(submitPanel);
 		
@@ -114,25 +112,19 @@ public class GuiFile extends JFrame implements ActionListener
 	    frame.setLayout(new GridLayout(4,1));//grid layout of rows, columns for the entire window
 	    
 	    panel2.setLayout(new GridLayout(4,1));
-	    //For testing
-	    panel1.setBackground(Color.green);
-	    panel2.setBackground(Color.blue);
-	    panel3.setBackground(Color.yellow);
-	    panel4.setBackground(Color.red);
 	    
 	  //Style changes
 	    //make fonts for everything//Only set once so didnt use method
-	    fontBig = new Font("Helvetica", Font.BOLD,36);//Make a font style
 	    fontBold = new Font("Helvetica", Font.BOLD,26);//Make a font style
 	    font = new Font("Helvetica", Font.PLAIN,26);
 	    
-	    // apply the font style to all
-	    instructionsLabel.setFont(fontBold);
 	    
 	    homeB.setFont(font);
 	    homeB.setFocusable(false);
 	    homeB.setPreferredSize(new Dimension(120, 50));//width,height//Set the size of the button within the panel thats the full grid size
 	    homeB.setBackground(new Color(220,220,220));
+	    
+	    filePathLabel.setFont(font);
 	    //For file button style
 	    fileB.setFont(fontBold);
 	    fileB.setFocusable(false);
@@ -153,8 +145,6 @@ public class GuiFile extends JFrame implements ActionListener
 		
 		resultTextArea.setFont(font);//have matching font
 		resultTextArea.setEditable(false);
-//        add(scroll, BorderLayout.CENTER);
-        //resultTextArea.add(scroll);
 		
 		panel3.add(scroll);//show in gui
 	}  
@@ -174,6 +164,7 @@ public class GuiFile extends JFrame implements ActionListener
 		
 		filePath = theFile.getSelectedFile().toString();//where the chosen file string is stored
 		Control.setChosenFile(filePath);
+		frame.revalidate();//refresh frame
 		return filePath;
 	}
 	

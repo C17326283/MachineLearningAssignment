@@ -1,4 +1,4 @@
- package com.assignment.machinelearning;
+package com.assignment.machinelearning;
 
 public class Patient 
 {
@@ -20,7 +20,7 @@ public class Patient
 //Methods//////////
 	public String toString()
 	{
-		return("Temperature: " +getTemperature()+",  Aches: "+getAches()+",  SoreThroat: "+getSoreThroat()+",  Tonsilitis: "+getTonsillitis());
+		return("Temperature: " +getTemperature()+" | Aches: "+getAches()+" | SoreThroat: "+getSoreThroat()+" | Tonsilitis: "+getTonsillitis());
 	}
 	
 //GETTERS AND SETTERS/////////////////

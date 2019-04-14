@@ -5,29 +5,29 @@ import java.util.ArrayList;
 public class FindProbability 
 {
 	//Make variables//////////
-	float patientsCount = 0;//the amount of training patients//These vars are only used in this class so i dont use getters and setters.
+	private float patientsCount = 0;//the amount of training patients//These vars are only used in this class so i dont use getters and setters.
 	
-	float yesTonsillitisCount = 0;//People with tonsillitis
-	float noTonsillitisCount = 0;//People without tonsillitis
+	private float yesTonsillitisCount = 0;//People with tonsillitis
+	private float noTonsillitisCount = 0;//People without tonsillitis
 	
-	float tempWithTS;//Have temperature and Tonsillitis
-	float achesWithTS;//Have aches and Tonsillitis
-	float soreWithTS;//Have sore throat and Tonsillitis
-	float tempWithoutTS;//Have temperature and don't have Tonsillitis
-	float achesWithoutTS;//Have aches and don't have Tonsillitis
-	float soreWithoutTS;//Have sore throat and don't have Tonsillitis
+	private float tempWithTS;//Have temperature and Tonsillitis
+	private float achesWithTS;//Have aches and Tonsillitis
+	private float soreWithTS;//Have sore throat and Tonsillitis
+	private float tempWithoutTS;//Have temperature and don't have Tonsillitis
+	private float achesWithoutTS;//Have aches and don't have Tonsillitis
+	private float soreWithoutTS;//Have sore throat and don't have Tonsillitis
 
-	String temp;//The inputed symptoms
-	String aches;
-	String sore;
+	private String temp;//The inputed symptoms
+	private String aches;
+	private String sore;
 	
-	float yesTotal;//The multiplication of each entered symptoms likeliness to cause tonsillitis by how many people have it out of everyone
-	float noTotal;//The multiplication of each entered symptoms likeliness not to cause tonsillitis by how many people dont have it out of everyone
-	float yesAndNoSum;//Adding the two likliness's of having and not having, used to multiply
-	float probabilityOfHavingTS;//Multiplication of yesTotal by yesAndNoSum. gives percent chance of having
-	float probabilityOfNotHavingTS;//Multiplication of noTotal by yesAndNoSum.  gives percent chance of nop having
+	private float yesTotal;//The multiplication of each entered symptoms likeliness to cause tonsillitis by how many people have it out of everyone
+	private float noTotal;//The multiplication of each entered symptoms likeliness not to cause tonsillitis by how many people dont have it out of everyone
+	private float yesAndNoSum;//Adding the two likliness's of having and not having, used to multiply
+	private float probabilityOfHavingTS;//Multiplication of yesTotal by yesAndNoSum. gives percent chance of having
+	private float probabilityOfNotHavingTS;//Multiplication of noTotal by yesAndNoSum.  gives percent chance of nop having
 	
-	ArrayList<Patient> trainingCaseList = new ArrayList<Patient>();//Make arraylist to store all the patient objects
+	private ArrayList<Patient> trainingCaseList = new ArrayList<Patient>();//Make arraylist to store all the patient objects
 	
 	//Constructor//////////
 	public FindProbability(String temp, String aches, String sore)//Catches and currently renames
@@ -141,7 +141,7 @@ public class FindProbability
 		float correctGuesses = 0;
 		float Accuracy = 0;
 		
-		FileProcessor fp = new FileProcessor("src\\com\\assignment\\machinelearning\\TestCases.csv");//Constructs a fileprocessor object which just assigns the filename
+		FileProcessor fp = new FileProcessor(Control.getChosenFile());//Constructs a fileprocessor object which just assigns the filename
 		fp.openFile();//open just to get array from file
 		trainingCaseList = fp.readFile();//fills array list from file. make new one here instead of calling across classes//Makes with 100% of values.
 		fp.closeFile();

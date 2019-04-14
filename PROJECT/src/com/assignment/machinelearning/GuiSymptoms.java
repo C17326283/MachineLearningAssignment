@@ -23,42 +23,42 @@ import java.awt.Color;
 public class GuiSymptoms extends JFrame implements ActionListener
 {
 //Make all attributes//////////////////////////////////////////////////////////////
-	JFrame frame;
+	private JFrame frame;
 	
-	JPanel panel1;//Main frame panels
-	JPanel panel2;                   
-	JPanel panel3;                   
-	JPanel panel4;//Need to declare because i want to hide before its needed
-	JPanel panel5;
+	private JPanel panel1;//Main frame panels
+	private JPanel panel2;                   
+	private JPanel panel3;                   
+	private JPanel panel4;//Need to declare because i want to hide before its needed
+	private JPanel panel5;
 	
-	JButton homeB;//Needs declaration for action event
-	JButton submitB;//Need to declare buttons so they can be accessed when making gui
-	JRadioButton tempCoolB;
-	JRadioButton tempNormalB;
-	JRadioButton tempHotB;
-	JRadioButton achesYesB;
-	JRadioButton achesNoB;
-	JRadioButton soreYesB;
-	JRadioButton soreNoB;
+	private JButton homeB;//Needs declaration for action event
+	private JButton submitB;//Need to declare buttons so they can be accessed when making gui
+	private JRadioButton tempCoolB;
+	private JRadioButton tempNormalB;
+	private JRadioButton tempHotB;
+	private JRadioButton achesYesB;
+	private JRadioButton achesNoB;
+	private JRadioButton soreYesB;
+	private JRadioButton soreNoB;
 	
-	String resultsString;
-	JLabel resultsLabel;
+	private String resultsString;
+	private JLabel resultsLabel;
 	
-	JPanel accuracyPanel;//will contain accuracy label and accuracy BarPanel
-	String accuracyString;//string containing accuracy
-	JLabel accuracyLabel;//label containing string
-	JPanel accuracyBarPanel;//contains pb
-	JProgressBar pb;//filled later
+	private JPanel accuracyPanel;//will contain accuracy label and accuracy BarPanel
+	private String accuracyString;//string containing accuracy
+	private JLabel accuracyLabel;//label containing string
+	private JPanel accuracyBarPanel;//contains pb
+	private JProgressBar pb;//filled later
 	
-	Font fontBig;
-	Font fontBold;
-	Font font;
+	private Font fontBig;
+	private Font fontBold;
+	private Font font;
 //Constructor////////////////////
 	public GuiSymptoms()//Construct
 	{ 
 	//MAKE and instantiate//////////
 		//Make dirrectly instead of 
-	    frame = new JFrame("Ryan Byrne Assignment");//The main window 
+	    frame = new JFrame("Symptom page");//The main window 
 	    
 	    //All the panels to go into the window
 	    panel1 = new JPanel();//Main frame panels

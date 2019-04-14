@@ -20,11 +20,9 @@ public class GuiHome extends JFrame implements ActionListener
 	JButton guiSymptomsButton;
 	JButton page2Button;
 	{
-    
-		System.out.println(Control.getChosenFile());
 	//Make 
 	    //frame
-	    frame = new JFrame("BoxLayout Test");
+	    frame = new JFrame("Home Page");
 	    frame.setLayout(new GridLayout(5,1));//grid layout of rows, columns //5 tall,1 wide
 	    
 	    //layouts
@@ -37,7 +35,7 @@ public class GuiHome extends JFrame implements ActionListener
 	    
 	    guiSymptomsButton = new JButton("Enter Symptoms");//Go to respective guis
 	    guiSymptomsButton.addActionListener(this);
-	    page2Button = new JButton("Other page");
+	    page2Button = new JButton("File selector");
 	    page2Button.addActionListener(this);
 	    
 	    JLabel programName = new JLabel("Tonsillitis Checker");//The big name thats displayed

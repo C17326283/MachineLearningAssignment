@@ -13,8 +13,6 @@ public class Control
 	public static void main(String[] args)
 	{	
 		GuiHome GuiHome = new GuiHome();//Make an instance of the gui to use it
-		
-		
 	}
 
 	//GETTER AND SETTERS 
