@@ -33,13 +33,7 @@ import java.awt.Color;
 
 public class GuiSymptoms extends JFrame implements ActionListener
 {
-	
-	//HEREdf
-	
-	
-
 //Make all attributes//////////////////////////////////////////////////////////////
-
 	JFrame frame;
 	
 	JPanel panel1;//Main frame panels
@@ -84,6 +78,7 @@ public class GuiSymptoms extends JFrame implements ActionListener
 	    panel4 = new JPanel();
 	    panel5 = new JPanel();
 	    
+	    JPanel homeBPanel = new JPanel();//Need to make a panel for home button so it doesnt fill the grid and i can still align it
 	    homeB = new JButton("Home");
 	    homeB.addActionListener(this);
 	    
@@ -163,7 +158,8 @@ public class GuiSymptoms extends JFrame implements ActionListener
 		frame.add(panel4);//panel with submit button, result and accuracy check
 		frame.add(panel5);//empty panel
 		
-		panel1.add(homeB);
+		homeBPanel.add(homeB);//add home button to panel so can align to top left
+		panel1.add(homeBPanel);
 		
 		panel2.add(instructionsLabel);
 		
@@ -213,6 +209,7 @@ public class GuiSymptoms extends JFrame implements ActionListener
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//Close properly
 	    frame.setLayout(new GridLayout(5,1));//grid layout of rows, columns for the entire window
 	    
+	    panel1.setLayout(new GridLayout(1,1));
 	    panel2.setLayout(new GridLayout(1,1));//Needed to make a grid so can align text to centre instead of top
 	    
 	    //For the main grid of inputs to show, //in grid 3
@@ -262,6 +259,10 @@ public class GuiSymptoms extends JFrame implements ActionListener
 	    ToolTipManager.sharedInstance().setDismissDelay(Integer.MAX_VALUE);//For keeping tooltips visible aslong as user hovers.//gotten from https://www.rgagnon.com/javadetails/java-0528.html
 	
 	    
+	    homeB.setFont(font);
+	    homeB.setFocusable(false);
+	    homeB.setPreferredSize(new Dimension(120, 50));//width,height//Set the size of the button within the panel thats the full grid size
+	    homeB.setBackground(new Color(220,220,220));
 	    //For submit button
 	    submitB.setFont(fontBold);
 	    submitB.setFocusable(false);
@@ -272,7 +273,12 @@ public class GuiSymptoms extends JFrame implements ActionListener
 //Methods///////////
 	public void actionPerformed(ActionEvent EV)
 	{
-		
+		//Home button
+		if(EV.getSource() == homeB)//get source shows what functionality triggered it
+		{
+			GuiHome guiHome = new GuiHome();
+			frame.dispose();
+		}
 		if(EV.getSource() == submitB)//get source shows what functionality triggered it
 		{
 			String inputTemp = null;//Values that will be used to pass to array
@@ -326,7 +332,7 @@ public class GuiSymptoms extends JFrame implements ActionListener
 				correctInput = false;
 			}
 			
-			if(correctInput == true)//TODO switch incorrect to correct
+			if(correctInput == true)
 			{
 				FindProbability p1 = new FindProbability(inputTemp, inputAches, inputSore);
 				//for displaying result
