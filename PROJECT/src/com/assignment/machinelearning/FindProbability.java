@@ -1,3 +1,8 @@
+/*This class takes  in 3 symptom values and get an estimate of their probability to have tonsillitis, it also contains the method to find the accuracy of the system
+ * The constructor uses the 3 entered symptoms, makes a list of testcases form the file then counts all the needed variables and uses them in the maths
+ *findAccuracy breaks the list into 2 lists of 70% and 30% then uses the object in that 30% to check the against the 70% and see if the system guessed right
+ *
+ */
 package com.assignment.machinelearning;
 
 import java.util.ArrayList;

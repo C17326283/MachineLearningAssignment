@@ -1,3 +1,7 @@
+/*Just constructs the object with temp, aches, sorethroat and tonsillitis from the file of test cases
+ * 
+ */
+
 package com.assignment.machinelearning;
 
 public class Patient 

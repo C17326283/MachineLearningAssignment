@@ -1,3 +1,7 @@
+/*this screen lets the user enter their symptomns using jradiobuttons that is then tested for probability of having tonsillitis
+ * it also displays result and the accuracy of the system, it also has tooltips for describing the symptoms
+ */
+
 package com.assignment.machinelearning;
 
 import java.awt.FlowLayout;
@@ -50,7 +54,6 @@ public class GuiSymptoms extends JFrame implements ActionListener
 	private JPanel accuracyBarPanel;//contains pb
 	private JProgressBar pb;//filled later
 	
-	private Font fontBig;
 	private Font fontBold;
 	private Font font;
 //Constructor////////////////////
@@ -93,8 +96,8 @@ public class GuiSymptoms extends JFrame implements ActionListener
 	    soreNoB = new JRadioButton("No "); 
 	    
 	    //in panel 5//Thses will all be used after action event
-	    accuracyPanel = new JPanel();//initialise panel
-	    accuracyLabel = new JLabel();//initialise panel
+	    accuracyPanel = new JPanel();//Initialize panel
+	    accuracyLabel = new JLabel();//Initialize label
 	    accuracyBarPanel = new JPanel();//for holding the accuracy bar
 	    pb = new JProgressBar(0,100);//make a progress bar from 0 to 100//dont add to anything untill submit//filled later
 	    
@@ -128,10 +131,12 @@ public class GuiSymptoms extends JFrame implements ActionListener
 	    JLabel achesInfo = new JLabel(infoIcon);
 	    JLabel soreInfo = new JLabel(infoIcon);
 	    
+	    //Tooltips have explanations of symptoms
 	    String tempTipText = "Normal body temperature is around ranges from 36.1°C (97°F) to 37.2°C (99°F).\n If you are above this range then select hot and if you are below select cool.";
 	    String achesTipText = "A continuous or dull pain, such as backache, throbbing, headache & toothache.";
 	    String soreTipText = "Pain, scratchiness or irritation in the throat.";
 	    
+	    //For showing the results
 	    resultsLabel = new JLabel("", SwingConstants.CENTER);//got swing constants from http://www.java2s.com/Code/Java/Swing-JFC/AsimpledemonstrationoftextalignmentinJLabels.htm
 	    
 	//ADD//////////
@@ -142,7 +147,7 @@ public class GuiSymptoms extends JFrame implements ActionListener
 		frame.add(panel4);//panel with submit button, result and accuracy check
 		frame.add(panel5);//empty panel
 		
-		homeBPanel.add(homeB);//add home button to panel so can align to top left
+		homeBPanel.add(homeB);//add home button to panel so can align to top
 		panel1.add(homeBPanel);
 		
 		panel2.add(instructionsLabel);
@@ -174,7 +179,6 @@ public class GuiSymptoms extends JFrame implements ActionListener
 	    acheGroup.add(achesNoB);
 	    throatGroup.add(soreYesB);
 	    throatGroup.add(soreNoB);
-		
 		
 		//for places to put submit button and accuracy check
 	    submitPanel.add(submitB);
@@ -216,7 +220,6 @@ public class GuiSymptoms extends JFrame implements ActionListener
 */	    
 	  //Style changes
 	    //make fonts for everything//Only set once so didnt use method
-	    fontBig = new Font("Helvetica", Font.BOLD,36);//Make a font style
 	    fontBold = new Font("Helvetica", Font.BOLD,26);//Make a font style
 	    font = new Font("Helvetica", Font.PLAIN,26);
 	    

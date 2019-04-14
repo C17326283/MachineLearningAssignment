@@ -1,3 +1,7 @@
+/*this screen lets the user choose which secton to go to
+ * 
+ */
+
 package com.assignment.machinelearning;
 
 import java.awt.Font;

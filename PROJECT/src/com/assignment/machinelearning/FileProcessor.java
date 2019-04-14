@@ -1,3 +1,8 @@
+/*The fileprocessor just takes the path of the file and opens it, reads and returns values from it and closes it again when the user specifies
+ * 
+ * 
+ */
+
 package com.assignment.machinelearning;
 
 import java.io.File;
@@ -8,10 +13,10 @@ import java.util.Scanner;
 public class FileProcessor 
 {
 //ATTRIBUTES///////////////
-	String fileName;//the string thats taken in for the filepath
-	Scanner myScanner;//the thing that actually opens the file
-	File fileData;
-	ArrayList<Patient> trainingCaseList = new ArrayList<Patient>();
+	private String fileName;//the string thats taken in for the filepath
+	private Scanner myScanner;//the thing that actually opens the file
+	private File fileData;
+	private ArrayList<Patient> trainingCaseList = new ArrayList<Patient>();
 	
 	
 //CONSTRUCTOR////////////
