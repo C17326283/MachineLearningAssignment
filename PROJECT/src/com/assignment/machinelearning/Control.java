@@ -15,7 +15,7 @@ public class Control
 //		GuiPage2 gui2 = new GuiPage2();//Make an instance of the gui to use it
 		
 		FindProbability p1 = new FindProbability("Hot", "Yes", "Yes");
-		System.out.println(p1);
+//		System.out.println(p1);
 		
 		p1.FindAccuracy();
 		//Make object add name, open, read list and get back arraylist of patients, close

@@ -95,7 +95,6 @@ public class FindProbability
 		}
 		//Find accuracy and return
 		Accuracy = ((correctGuesses/testingCaseList.size())*100);//amount of correct guesses over total guesses * 100 = the accuracy
-		System.out.println("===Accuracy: "+Math.round(Accuracy)+"%");//Round so not float, and add % because it looks better
 		return Accuracy;
 	}
 	

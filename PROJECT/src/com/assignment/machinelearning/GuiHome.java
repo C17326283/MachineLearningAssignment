@@ -96,7 +96,7 @@ public class GuiHome extends JFrame implements ActionListener
 	    page2Button.setFont(smallFont);
 	    page2Button.setPreferredSize(new Dimension(350, 70));//row,col//Set the size of the button within the panel thats the full grid size
 	    page2Button.setBackground(new Color(220,220,220));
-	    guiSymptomsButton.setFocusable(false);//remove blue square for selecting
+	    page2Button.setFocusable(false);//remove blue square for selecting
 	}
 
 	public void actionPerformed(ActionEvent EV)
