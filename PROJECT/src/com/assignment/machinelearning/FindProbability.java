@@ -13,19 +13,19 @@ public class FindProbability
 	float tempWithTS;//Have temperature and Tonsillitis
 	float achesWithTS;//Have aches and Tonsillitis
 	float soreWithTS;//Have sore throat and Tonsillitis
-	float tempWithoutTS;//Have temperature and dont have Tonsillitis
-	float achesWithoutTS;//Have aches and dont have Tonsillitis
-	float soreWithoutTS;//Have sore throat and dont have Tonsillitis
+	float tempWithoutTS;//Have temperature and don't have Tonsillitis
+	float achesWithoutTS;//Have aches and don't have Tonsillitis
+	float soreWithoutTS;//Have sore throat and don't have Tonsillitis
 
 	String temp;//The inputed symptoms
 	String aches;
 	String sore;
 	
-	float yesTotal;//The multiplication of each entered symptoms likliness to cause tonsillitis by how many people have it out of everyone
-	float noTotal;//The multiplication of each entered symptoms likliness not to cause tonsillitis by how many people dont have it out of everyone
+	float yesTotal;//The multiplication of each entered symptoms likeliness to cause tonsillitis by how many people have it out of everyone
+	float noTotal;//The multiplication of each entered symptoms likeliness not to cause tonsillitis by how many people dont have it out of everyone
 	float yesAndNoSum;//Adding the two likliness's of having and not having, used to multiply
-	float probabilityOfHavingTS;//Multipication of yesTotal by yesAndNoSum. gives percent chance of having
-	float probabilityOfNotHavingTS;//Multipication of noTotal by yesAndNoSum.  gives percent chance of nopthaving
+	float probabilityOfHavingTS;//Multiplication of yesTotal by yesAndNoSum. gives percent chance of having
+	float probabilityOfNotHavingTS;//Multiplication of noTotal by yesAndNoSum.  gives percent chance of nop having
 	
 	ArrayList<Patient> trainingCaseList = new ArrayList<Patient>();//Make arraylist to store all the patient objects
 	
@@ -36,66 +36,13 @@ public class FindProbability
 		this.aches = aches;
 		this.sore = sore;
 		
-		FileProcessor fp = new FileProcessor("src\\com\\assignment\\machinelearning\\TestCases.csv");//Constructs a fileprocessor object which just assigns the filename
+		FileProcessor fp = new FileProcessor("src\\com\\assignment\\machinelearning\\TestCases.csv");//Constructs a file processor object which just assigns the filename
 		fp.openFile();
-		trainingCaseList = fp.readFile();//fills arraylist from file. make new one here instead of calling across classes
+		trainingCaseList = fp.readFile();//fills array list from file. make new one here instead of calling across classes
 		fp.closeFile();
 		
 		countList();//Fills all the neccesary variables with the number of times it showed up in the file//In gui because always do
 		calculate();//Uses the counts to calculate the chances of having and not having Tonsillitis
-	}
-	
-	public float FindAccuracy()//Catches and currently renames
-	{
-		ArrayList<Patient> testingCaseList = new ArrayList<Patient>();//Make new arraylist for values to later test
-		int testDataSplit;//these are only used in the method
-		float correctGuesses = 0;
-		float Accuracy = 0;
-		
-		FileProcessor fp = new FileProcessor("src\\com\\assignment\\machinelearning\\TestCases.csv");//Constructs a fileprocessor object which just assigns the filename
-		fp.openFile();//open just to get array from file
-		trainingCaseList = fp.readFile();//fills arraylist from file. make new one here instead of calling across classes//Makes with 100% of values.
-		fp.closeFile();
-		
-		testDataSplit = (int) Math.round(trainingCaseList.size() * .70);//Gives a number to split the file at//Need to do 
-		
-		//Stay at the split and for every object after that it moves into the same position of split, add it to the other list and remove it from this one.
-		int i = testDataSplit;
-		//Look at the place after the 70% split, move that object into other list and remove from this, repeat untill no more
-		while(testDataSplit != trainingCaseList.size())//done it this way because i didnt want testdata to go in backward
-		{
-			testingCaseList.add(trainingCaseList.get(i));//Adds last 30% of old training list to new testinglist
-			trainingCaseList.remove(i);//removes last 30% of objects from array
-		}
-		
-		//Uses all of the new test cases and test against the 70% of traingCaseList.
-		for(i = 0; i<testingCaseList.size(); i++)
-		{
-			temp = testingCaseList.get(i).getTemperature();//Need to assign the symptoms of the test patients to check
-			aches = testingCaseList.get(i).getAches();
-			sore = testingCaseList.get(i).getSoreThroat();
-			
-			countList();//Fills all the neccesary variables with the number of times it showed up in the training list//In gui because always do
-			calculate();//Uses the counts to calculate the chances of having and not having Tonsillitis based on 
-			
-			if(getProbabilityOfHavingTS() >= 50)//If the chance is over 50 then the machine thinks they have it
-			{
-				if(testingCaseList.get(i).getTonsillitis().equals("Yes"))//Checks if the machine guess matches up to the answer
-				{
-					correctGuesses++;//only increment correct, dont need incorrect
-				}
-			}
-			else if(getProbabilityOfHavingTS() < 50)
-			{
-				if(testingCaseList.get(i).getTonsillitis().equals("No"))
-				{
-					correctGuesses++;
-				}
-			}
-		}
-		//Find accuracy and return
-		Accuracy = ((correctGuesses/testingCaseList.size())*100);//amount of correct guesses over total guesses * 100 = the accuracy
-		return Accuracy;
 	}
 	
 	public void countList()//Goes through file and counts up all the values needed based on user input
@@ -110,7 +57,7 @@ public class FindProbability
 		tempWithoutTS = 0;
 		achesWithoutTS = 0;
 		soreWithoutTS = 0;
-		//Dont need to reset maths variables since they are assinged a new number anyways
+		//Don't need to reset maths variables since they are assigned a new number anyways
 		
 		patientsCount = trainingCaseList.size();//How many lines in file is amount of patients made
 		
@@ -163,8 +110,8 @@ public class FindProbability
 		yesTotal = (tempWithTS/yesTonsillitisCount)*(achesWithTS/yesTonsillitisCount)*(soreWithTS/yesTonsillitisCount)*(yesTonsillitisCount/patientsCount);
 		noTotal = (tempWithoutTS/noTonsillitisCount)*(achesWithoutTS/noTonsillitisCount)*(soreWithoutTS/noTonsillitisCount)*(noTonsillitisCount/patientsCount);
 		yesAndNoSum = yesTotal + noTotal;
-		probabilityOfHavingTS = Math.round((yesTotal / yesAndNoSum)*100);//multiply by 100 then round to get actuall percent
-		probabilityOfNotHavingTS = Math.round((noTotal / yesAndNoSum)*100);//multiply by 100 then round to get actuall percent
+		probabilityOfHavingTS = Math.round((yesTotal / yesAndNoSum)*100);//multiply by 100 then round to get actual percent
+		probabilityOfNotHavingTS = Math.round((noTotal / yesAndNoSum)*100);//multiply by 100 then round to get actual percent
 		
 		//Prints for testing
 /*		System.out.println("----------------------------------------------");
@@ -186,6 +133,59 @@ public class FindProbability
 		System.out.println("probabilityOfHavingTS: "+probabilityOfHavingTS);
 		System.out.println("probabilityOfNotHavingTS: "+probabilityOfNotHavingTS);
 */	}
+	
+	public float FindAccuracy()//Catches and currently renames
+	{
+		ArrayList<Patient> testingCaseList = new ArrayList<Patient>();//Make new arraylist for values to later test
+		int testDataSplit;//these are only used in the method
+		float correctGuesses = 0;
+		float Accuracy = 0;
+		
+		FileProcessor fp = new FileProcessor("src\\com\\assignment\\machinelearning\\TestCases.csv");//Constructs a fileprocessor object which just assigns the filename
+		fp.openFile();//open just to get array from file
+		trainingCaseList = fp.readFile();//fills array list from file. make new one here instead of calling across classes//Makes with 100% of values.
+		fp.closeFile();
+		
+		testDataSplit = (int) Math.round(trainingCaseList.size() * .70);//Gives a number to split the file at//Need to do 
+		
+		//Stay at the split and for every object after that it moves into the same position of split, add it to the other list and remove it from this one.
+		int i = testDataSplit;
+		//Look at the place after the 70% split, move that object into other list and remove from this, repeat until no more
+		while(testDataSplit != trainingCaseList.size())//done it this way because i didn't want test data to go in backward
+		{
+			testingCaseList.add(trainingCaseList.get(i));//Adds last 30% of old training list to new testing list
+			trainingCaseList.remove(i);//removes last 30% of objects from array
+		}
+		
+		//Uses all of the new test cases and test against the 70% of traingCaseList.
+		for(i = 0; i<testingCaseList.size(); i++)
+		{
+			temp = testingCaseList.get(i).getTemperature();//Need to assign the symptoms of the test patients to check
+			aches = testingCaseList.get(i).getAches();
+			sore = testingCaseList.get(i).getSoreThroat();
+			
+			countList();//Fills all the neccesary variables with the number of times it showed up in the training list//In gui because always do
+			calculate();//Uses the counts to calculate the chances of having and not having Tonsillitis based on 
+			
+			if(getProbabilityOfHavingTS() >= 50)//If the chance is over 50 then the machine thinks they have it
+			{
+				if(testingCaseList.get(i).getTonsillitis().equals("Yes"))//Checks if the machine guess matches up to the answer
+				{
+					correctGuesses++;//only increment correct, don't need incorrect
+				}
+			}
+			else if(getProbabilityOfHavingTS() < 50)
+			{
+				if(testingCaseList.get(i).getTonsillitis().equals("No"))
+				{
+					correctGuesses++;
+				}
+			}
+		}
+		//Find accuracy and return
+		Accuracy = ((correctGuesses/testingCaseList.size())*100);//amount of correct guesses over total guesses * 100 = the accuracy
+		return Accuracy;
+	}
 	
 	public String toString()
 	{
@@ -239,13 +239,13 @@ public class FindProbability
 Naive bayes considers each feature independently(naive) to find a probability
 uses the maximum likelihood
 P(A|B) probability A occurs given that b is true
-P(A) and  P(B) seperate probabilities of each
+P(A) and  P(B) separate probabilities of each
 first get the probability of all yes's and no's whiel they have tonsillitis or and then not
 In sample data: 18 patient
 
 So the formula for probability of having TS:
-all(probability of sympton given TS)(has TS/all patients) = x
-all(probability of sympton given no TS)(not have TS/all patients) = y
+all(probability of symptom given TS)(has TS/all patients) = x
+all(probability of symptom given no TS)(not have TS/all patients) = y
 x + y = z
 x/z = probability of having
 */

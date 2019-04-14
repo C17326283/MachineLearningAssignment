@@ -103,17 +103,11 @@ public class GuiSymptoms extends JFrame implements ActionListener
 	    soreYesB = new JRadioButton("Yes ");  
 	    soreNoB = new JRadioButton("No "); 
 	    
-	    //in panel 4//this triggers event causing other stuff to be made
-	    JPanel submitPanel = new JPanel();//Panel to put submit button on so it doesnt fill the whole gridslot
-	    submitB = new JButton("Submit");//Button for running findprobabilty class
-	    submitB.addActionListener(this);
-	    
 	    //in panel 5//Thses will all be used after action event
 	    accuracyPanel = new JPanel();//initialise panel
 	    accuracyLabel = new JLabel();//initialise panel
 	    accuracyBarPanel = new JPanel();//for holding the accuracy bar
 	    pb = new JProgressBar(0,100);//make a progress bar from 0 to 100//dont add to anything untill submit//filled later
-	    
 	    
 	    //The buttons for selecting symptoms
 	    tempCoolB = new JRadioButton("Cool ");  
@@ -124,9 +118,10 @@ public class GuiSymptoms extends JFrame implements ActionListener
 	    soreYesB = new JRadioButton("Yes ");  
 	    soreNoB = new JRadioButton("No "); 
 	    
+	    //in panel 4//this triggers event causing other stuff to be made
+	    JPanel submitPanel = new JPanel();//Panel to put submit button on so it doesnt fill the whole gridslot
 	    submitB = new JButton("Submit");//Button for running findprobabilty class
 	    submitB.addActionListener(this);
-	    
 	    
 	    //The text beside input
 	    JLabel l1 = new JLabel("Temperature: ");
@@ -140,7 +135,7 @@ public class GuiSymptoms extends JFrame implements ActionListener
 	    
 	    //for adding tooltip icons
 	    ImageIcon infoIcon = new ImageIcon("images\\infoIcon.png"); //Get image from file
-	    JLabel tempInfo = new JLabel(infoIcon);
+	    JLabel tempInfo = new JLabel(infoIcon);//Make an icon with different tooltip for each symptom
 	    JLabel achesInfo = new JLabel(infoIcon);
 	    JLabel soreInfo = new JLabel(infoIcon);
 	    

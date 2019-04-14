@@ -51,7 +51,7 @@ public class GuiHome extends JFrame implements ActionListener
 	    page2Button = new JButton("Other page");
 	    page2Button.addActionListener(this);
 	    
-	    JLabel programName = new JLabel("Symptom Checker");//The big name thats displayed
+	    JLabel programName = new JLabel("Tonsillitis Checker");//The big name thats displayed
 	    ImageIcon logoImage = new ImageIcon("images\\logo.png"); //Get image from file
 	    JLabel logo = new JLabel(logoImage); //Make image into label so it can be placed
 	    

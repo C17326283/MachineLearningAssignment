@@ -34,7 +34,7 @@ public class FileProcessor
     {
 	    try//Need a try incase file is not found then it gives an error, uses catch and it warns user
 		{
-	    	myScanner = new Scanner(fileData); //Scanner reads the actuall content of the file.
+	    	myScanner = new Scanner(fileData); //Scanner reads the actual content of the file.
 	    	
 	    	while (myScanner.hasNextLine())//for every line in file
 		    {
