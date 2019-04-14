@@ -39,25 +39,24 @@ public class GuiHome extends JFrame implements ActionListener
 	    frame.setLayout(new GridLayout(5,1));//grid layout of rows, columns //5 tall,1 wide
 	    
 	    //layouts
-	    JPanel menuPanel = new JPanel();
+	    JPanel menuPanel = new JPanel();//The panels that go onto the main frame in the grid spaces
 	    JPanel fillerPanel1 = new JPanel();//For empty spaces at top and bottom of page
 	    JPanel fillerPanel2 = new JPanel();
 	    
-	    JPanel buttonPanel1 = new JPanel();
+	    JPanel buttonPanel1 = new JPanel();//Button panels so the buttons dont fill a full grid space
 	    JPanel buttonPanel2 = new JPanel();
 	    
-	    guiSymptomsButton = new JButton("Enter Symptoms");
+	    guiSymptomsButton = new JButton("Enter Symptoms");//Go to respective guis
 	    guiSymptomsButton.addActionListener(this);
 	    page2Button = new JButton("Other page");
 	    page2Button.addActionListener(this);
 	    
-	    JLabel programName = new JLabel("Symptom Checker");
+	    JLabel programName = new JLabel("Symptom Checker");//The big name thats displayed
 	    ImageIcon logoImage = new ImageIcon("images\\logo.png"); //Get image from file
 	    JLabel logo = new JLabel(logoImage); //Make image into label so it can be placed
 	    
-	    
 	//Add
-	    frame.add(fillerPanel1);
+	    frame.add(fillerPanel1);//add all the components to the main page in each of the grid spaces top to bottom
 	    frame.add(logo);
 	    frame.add(programName);
 	    frame.add(menuPanel);
@@ -67,9 +66,8 @@ public class GuiHome extends JFrame implements ActionListener
 	    buttonPanel2.add(page2Button);
 	    
 	    menuPanel.setLayout(new GridLayout(2,1));//grid layout of rows, columns //5 tall,1 wide
-	    menuPanel.add(buttonPanel1);
+	    menuPanel.add(buttonPanel1);//add each panel that contains a button to the menu panel thats has buttons to go to the next pages
 	    menuPanel.add(buttonPanel2);
-	    
 	    
 	//Edit
 	    ////layouts
@@ -78,25 +76,27 @@ public class GuiHome extends JFrame implements ActionListener
 	    frame.setExtendedState(frame.MAXIMIZED_BOTH);//Open in fullscreen
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//Close properly
 	    frame.setLayout(new GridLayout(5,1));//grid layout of rows, columns //5 tall,1 wide
+	    frame.setMinimumSize(new Dimension(600, 1100));//Min size because gui breaks and lower
 	    
 	    menuPanel.setLayout(new GridLayout(2,1));//grid layout of rows, columns //2 tall,1 wide
-	    
 
 	    //Make fonts to use
 	    Font largeFont = new Font("Helvetica", Font.BOLD,60);
-	    Font smallFont = new Font("Helvetica", Font.PLAIN,30);
+	    Font smallFont = new Font("Helvetica", Font.PLAIN,36);
 	    //Set styles
 	    programName.setFont(largeFont);
 	    programName.setPreferredSize(new Dimension(150, 100));
 	    programName.setHorizontalAlignment(JLabel.CENTER);
 	    
-	    
 	    guiSymptomsButton.setFont(smallFont);
-	    guiSymptomsButton.setPreferredSize(new Dimension(300, 80));//row,col//Set the size of the button within the panel thats the full grid size
+	    guiSymptomsButton.setPreferredSize(new Dimension(350, 70));//row,col//Set the size of the button within the panel thats the full grid size
+	    guiSymptomsButton.setBackground(new Color(220,220,220));//Change color of box background to light grey//the named one wasnt light enough
+	    guiSymptomsButton.setFocusable(false);//remove blue square for selecting
 	    
 	    page2Button.setFont(smallFont);
-	    page2Button.setPreferredSize(new Dimension(300, 80));//row,col//Set the size of the button within the panel thats the full grid size
-		
+	    page2Button.setPreferredSize(new Dimension(350, 70));//row,col//Set the size of the button within the panel thats the full grid size
+	    page2Button.setBackground(new Color(220,220,220));
+	    guiSymptomsButton.setFocusable(false);//remove blue square for selecting
 	}
 
 	public void actionPerformed(ActionEvent EV)

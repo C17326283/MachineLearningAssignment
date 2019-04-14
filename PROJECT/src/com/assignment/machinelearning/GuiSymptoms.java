@@ -9,6 +9,7 @@ import java.awt.Dimension;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,8 +19,12 @@ import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ToolTipManager;
+import javax.swing.border.EmptyBorder;
 
+import com.sun.xml.internal.ws.api.Component;
 
+import javafx.geometry.Pos;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -29,20 +34,25 @@ public class GuiSymptoms extends JFrame implements ActionListener
 {
 //Make all attributes//////////////////////////////////////////////////////////////
 
-	JButton submitB;
-	JRadioButton b1;
-	JRadioButton b2;
-	JRadioButton b3;
-	JRadioButton b4;
-	JRadioButton b5;
-	JRadioButton b6;
-	JRadioButton b7;
+	JButton submitB;//Need to declare buttons so they can eb access when making gui
+	JRadioButton tempCoolB;
+	JRadioButton tempNormalB;
+	JRadioButton tempHotB;
+	JRadioButton achesYesB;
+	JRadioButton achesNoB;
+	JRadioButton soreYesB;
+	JRadioButton soreNoB;
 	JProgressBar pb;
 	
-	JLabel l4;
+	JLabel accuracyLabel;
+	String accuracyString;
+	JPanel accuracyBarPanel;
 	
-	JPanel panel4;
-	
+	JPanel panel1;//Main frame panels
+	JPanel panel2;                   
+	JPanel panel3;                   
+	JPanel panel4;//Need to declare because i want to hide before its needed
+	JPanel panel5;
 //Constructor////////////////////
 	public GuiSymptoms()//Construct
 	{ 
@@ -51,99 +61,178 @@ public class GuiSymptoms extends JFrame implements ActionListener
 	    JFrame frame = new JFrame("Ryan Byrne Assignment");//The main window 
 	    
 	    //All the panels to go into the window
-	    JPanel panel1 = new JPanel();
-	    JPanel panel2 = new JPanel();
-	    JPanel panel3 = new JPanel();
+	    panel1 = new JPanel();//Main frame panels
+	    panel2 = new JPanel();
+	    panel3 = new JPanel();
 	    panel4 = new JPanel();
-	    JPanel gridPanel = new JPanel();//For grid of inputs
-	    JPanel fillerPanel1 = new JPanel();
+	    panel5 = new JPanel();
+	    
+	    
+	    
+	    JPanel optionsSection  = new JPanel();
+	    
+	    JPanel gridTextPanel = new JPanel();
+	    JPanel gridInfoPanel = new JPanel();
+	    JPanel gridInputPanel = new JPanel();//For grid of inputs
+	    
+	    JPanel fillerPanel1 = new JPanel();//to fill the spaces to make the input grid look right
 	    JPanel fillerPanel2 = new JPanel();
+	    JPanel fillerPanel3 = new JPanel();//This one is for putting space between submit and accuracy checker
+	    
+	    JPanel submitPanel = new JPanel();//Panel to put submit button on so it doesnt fill the whole gridslot
+	    JPanel accuracyBarPanel = new JPanel();//Panel to put submit button on so it doesnt fill the whole gridslot
 	    
 	    //The buttons for selecting symptoms
-	    b1 = new JRadioButton("Cold");  
-	    b2 = new JRadioButton("Normal");
-	    b3 = new JRadioButton("Hot");
-	    b4 = new JRadioButton("Yes");  
-	    b5 = new JRadioButton("No"); 
-	    b6 = new JRadioButton("Yes");  
-	    b7 = new JRadioButton("No"); 
-	    submitB = new JButton("Submit");
+	    tempCoolB = new JRadioButton("Cool ");  
+	    tempNormalB = new JRadioButton("Normal  ");
+	    tempHotB = new JRadioButton("Hot ");
+	    achesYesB = new JRadioButton("Yes ");  
+	    achesNoB = new JRadioButton("No "); 
+	    soreYesB = new JRadioButton("Yes ");  
+	    soreNoB = new JRadioButton("No "); 
+	    
+	    submitB = new JButton("Submit");//Button for running findprobabilty class
 	    submitB.addActionListener(this);
+	    
 	    pb = new JProgressBar(0,100);
 	    pb.setVisible(false);
-	   
 	    
+	    accuracyString = ("The accuracy of this program is: ");
+	    accuracyLabel = new JLabel(accuracyString);
+	    accuracyLabel.setVisible(true);
 	    
 	    //The text next to input
-	    JLabel l1 = new JLabel("Temperature:  ");
-	    JLabel l2 = new JLabel("Aches:  ");
-	    JLabel l3 = new JLabel("Sore Throat:  ");
+	    JLabel l1 = new JLabel("Temperature: ");
+	    JLabel l2 = new JLabel("Aches: ");
+	    JLabel l3 = new JLabel("Sore Throat: ");
 	    
-	    l4 = new JLabel("Program accuracy: ");
 	    
 	    //Button Group to make only one selectable
 	    ButtonGroup tempGroup = new ButtonGroup();
 	    ButtonGroup acheGroup = new ButtonGroup();
 	    ButtonGroup throatGroup = new ButtonGroup();
 	    
+	    //for adding tooltip icons
+	    ImageIcon infoIcon = new ImageIcon("images\\infoIcon.png"); //Get image from file
+	    JLabel tempInfo = new JLabel(infoIcon);
+	    JLabel achesInfo = new JLabel(infoIcon);
+	    JLabel soreInfo = new JLabel(infoIcon);
+	    
+	    String tempTipText = "Normal body temperature is around ranges from 36.1°C (97°F) to 37.2°C (99°F). If you are above this range then select hot and if you are below select cool.";
+	    String achesTipText = "A continuous or dull pain, such as backache, throbbing, headache & toothache.";
+	    String soreTipText = "Pain, scratchiness or irritation in the throat.";
+	    
+	    
+	    
 	//Add/////
+	    //
 	    frame.add(panel1);//add panel1 to frame
 		frame.add(panel2);
 		frame.add(panel3);
 		frame.add(panel4);
+		frame.add(panel5);
 		
-		panel2.add(gridPanel);
-		panel3.add(submitB);
+		panel3.add(optionsSection);
 		
-		panel4.add(l4);
-		panel4.add(pb);
-		
+		//options section
+		optionsSection.add(gridInfoPanel);//All text icon that when you hover over them give you info
+		optionsSection.add(gridTextPanel);//All the names for the symptoms
+		optionsSection.add(gridInputPanel);//All the input options
+		//Text panel
+		gridTextPanel.add(l1); 
+		gridTextPanel.add(l2); 
+		gridTextPanel.add(l3); 
+		//Text panel
+		gridInfoPanel.add(tempInfo); 
+		gridInfoPanel.add(achesInfo); 
+		gridInfoPanel.add(soreInfo); 
 		//Grid for inputs
-		gridPanel.add(l1); gridPanel.add(b1); gridPanel.add(b2); gridPanel.add(b3);
-		gridPanel.add(l2); gridPanel.add(b4); gridPanel.add(b5); gridPanel.add(fillerPanel1);
-		gridPanel.add(l3); gridPanel.add(b6); gridPanel.add(b7); gridPanel.add(fillerPanel2);
+		gridInputPanel.add(tempCoolB); gridInputPanel.add(tempNormalB); gridInputPanel.add(tempHotB);
+		gridInputPanel.add(achesYesB); gridInputPanel.add(achesNoB); gridInputPanel.add(fillerPanel1);
+		gridInputPanel.add(soreYesB); gridInputPanel.add(soreNoB); gridInputPanel.add(fillerPanel2);
 		
-		//Put radio buttons in group
-		tempGroup.add(b1);
-	    tempGroup.add(b2);
-	    tempGroup.add(b3);
-	    acheGroup.add(b4);
-	    acheGroup.add(b5);
-	    throatGroup.add(b6);
-	    throatGroup.add(b7);
+		//for places to put submit button and accuracy check
+		panel4.add(submitPanel);
+		panel4.add(fillerPanel3);
+		panel4.add(accuracyLabel);
+		panel4.add(accuracyBarPanel);
+		submitPanel.add(submitB);
+		accuracyBarPanel.add(pb);
+		
+		//Put radio buttons in group so you can only select one
+		tempGroup.add(tempCoolB);
+	    tempGroup.add(tempNormalB);
+	    tempGroup.add(tempHotB);
+	    acheGroup.add(achesYesB);
+	    acheGroup.add(achesNoB);
+	    throatGroup.add(soreYesB);
+	    throatGroup.add(soreNoB);
 	    
-	//Edit/////
+	//Edit & set/////
+	    //Set layout details
 	    //Frame
-	    frame.setSize(1000,1000);  
-	    frame.setVisible(true); 
-	    frame.setLayout(new GridLayout(4,1));//grid layout of rows, columns 
 	    frame.setExtendedState(frame.MAXIMIZED_BOTH);//Open in fullscreen
+	    frame.setSize(600,800); //default size if you exit fullscreen//1500,1200//width,height
+	    frame.setMinimumSize(new Dimension(600, 700));//Min size because gui breaks and lower
+	    frame.setVisible(true); 
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//Close properly
+	    frame.setLayout(new GridLayout(5,1));//grid layout of rows, columns for the entire window
 	    
-	    //Input grid settings
-	    gridPanel.setLayout(new GridLayout(3,4));
-	  
-	    //Panels 
-	    /*
+	    //For the main grid of inputs to show, 
+	    optionsSection.setLayout(new FlowLayout());
+	    gridInfoPanel.setLayout(new GridLayout(3,1 ,0,18));//The middle grid for info icon//rows,cols,horizontalgap,vertical gap//hat to use gaps to line up with buttons
+	    gridTextPanel.setLayout(new GridLayout(3,1 ,00,8));//The left grid for symptom name
+	    gridInputPanel.setLayout(new GridLayout(3,3 ,0,0));//The right grid for options
+	    
+	    panel4.setLayout(new GridLayout(4,1));//The right grid for options
+	    
+	    //For testing
 	    panel1.setBackground(Color.green);
 	    panel2.setBackground(Color.blue);
 	    panel3.setBackground(Color.yellow);
 	    panel4.setBackground(Color.red);
-	    */
+	    
+	    accuracyLabel = new JLabel(accuracyString);
+	    //TODO align accuracy to center
+	    //set object details
 	    //Set fonts for everything//Only set once so didnt use method
-	    Font fontB = new Font("Open Sans", Font.BOLD,24);//Make a font style
-	    Font font = new Font("Open Sans", Font.PLAIN,24);
-	    submitB.setFont(fontB);// apply the font style to all
+	    Font fontB = new Font("Helvetica", Font.BOLD,26);//Make a font style
+	    Font font = new Font("Helvetica", Font.PLAIN,26);
+	    
+	    //labels fro symtomnames
 	    l1.setFont(fontB);
 	    l2.setFont(fontB);
 	    l3.setFont(fontB);
-	    b1.setFont(font);
-	    b2.setFont(font);
-	    b3.setFont(font);
-	    b4.setFont(font);
-	    b5.setFont(font);
-	    b6.setFont(font);
-	    b7.setFont(font);
+	    
+	 // apply the font style to all
+	    submitB.setFont(fontB);     submitB.setFocusable(false);//not focused, to remove annoying blue box, for cursor selection
+	    tempCoolB.setFont(font);	tempCoolB.setFocusable(false);  
+	    tempNormalB.setFont(font);  tempNormalB.setFocusable(false);
+	    tempHotB.setFont(font);     tempHotB.setFocusable(false);   
+	    achesYesB.setFont(font);    achesYesB.setFocusable(false);  
+	    achesNoB.setFont(font);     achesNoB.setFocusable(false);   
+	    soreYesB.setFont(font);     soreYesB.setFocusable(false);   
+	    soreNoB.setFont(font);      soreNoB.setFocusable(false);    
+	   
+	    tempInfo.setToolTipText(tempTipText);//Tooptips for the i icons beside that display info on symptom.
+	    achesInfo.setToolTipText(achesTipText);
+	    soreInfo.setToolTipText(soreTipText);
+	    ToolTipManager.sharedInstance().setDismissDelay(Integer.MAX_VALUE);//For keeping tooltips visible aslong as user hovers.//gotten from https://www.rgagnon.com/javadetails/java-0528.html
+	
+	    
+	    
+	    gridInputPanel.setVisible(true);
+	    
+	    /*
+	    JPanel boxPanel = new JPanel();
+
+	    JLabel label = new JLabel("This should be centered");
+	    label.setHorizontalAlignment(SwingConstants.CENTER);
+	    centerPanel.add(label, BorderLayout.CENTER);
+
+	    contentPane.add(centerPanel, BorderLayout.CENTER);
+	    contentPane.pack();
+	    contentPane.setVisible(true);*/
 	}  
 
 //Methods///////////
@@ -152,68 +241,71 @@ public class GuiSymptoms extends JFrame implements ActionListener
 		
 		if(EV.getSource() == submitB)//get source shows what functionality triggered it
 		{
-			String inputTemp = null;
+			String inputTemp = null;//Values that will be used to pass to array
 			String inputAches = null;
 			String inputSore = null;
-			boolean incorrectInput = false;
+			boolean correctInput = true;//for checking all boxes are entered to pass values to probability checker
 			
 			//Temp
-			if(b1.isSelected())
+			if(tempCoolB.isSelected())
 			{
 				inputTemp = "Cool";
 			}
-			else if (b2.isSelected())
+			else if (tempNormalB.isSelected())
 			{
 				inputTemp = "Normal";
 			}
-			else if(b3.isSelected())
+			else if(tempHotB.isSelected())
 			{
 				inputTemp = "Hot";
 			}
 			else
 			{
-				incorrectInput = true;//If they didnt enter any value then dont run Probability check
+				correctInput = false;//If they didnt enter any value then dont run Probability check
 			}
 			
 			//Aches
-			if(b4.isSelected())
+			if(achesYesB.isSelected())
 			{
 				inputAches = "Yes";
 			}
-			else if (b5.isSelected())
+			else if (achesNoB.isSelected())
 			{
 				inputAches = "No";
 			}
 			else			
 			{
-				incorrectInput = true;
+				correctInput = false;
 			} 
 			
 			//Sore throat
-			if(b6.isSelected())
+			if(soreYesB.isSelected())
 			{
 				inputSore = "Yes";
 			}
-			else if (b7.isSelected())
+			else if (soreNoB.isSelected())
 			{
 				inputSore = "No";
 			}
 			else			
 			{
-				incorrectInput = true;
+				correctInput = false;
 			}
 			
-			if(incorrectInput == false)//TODO switch incorrect to correct
+			if(correctInput == true)//TODO switch incorrect to correct
 			{
 				FindProbability p1 = new FindProbability(inputTemp, inputAches, inputSore);
 				JOptionPane.showMessageDialog(this, p1);
 				
-				panel4.add(l4,p1.FindAccuracy());//TODO make it only show after input.
-				panel4.add(pb);
+				System.out.print(accuracyString);
+				accuracyString = accuracyString+p1.FindAccuracy();//Says how accurate the system is in panel4
+				accuracyLabel = new JLabel(accuracyString);
+				System.out.print(accuracyString);
+				accuracyLabel.setVisible(true);//Make visible once they have values.
 				pb.setValue((int)p1.FindAccuracy());
 				pb.setVisible(true);
 			}
-			else if(incorrectInput == true)
+			else if(correctInput == false)
 			{
 				JOptionPane.showMessageDialog(this,"There was incorrect input, please try again.");
 			}
