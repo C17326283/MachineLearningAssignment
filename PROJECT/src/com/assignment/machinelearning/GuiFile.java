@@ -1,38 +1,25 @@
 package com.assignment.machinelearning;
 
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Dimension;
 
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.ToolTipManager;
-import javax.swing.border.EmptyBorder;
-
-import com.sun.xml.internal.ws.api.Component;
-
-import javafx.geometry.Pos;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.awt.Color;
 
-public class GuiPage2 extends JFrame implements ActionListener
+public class GuiFile extends JFrame implements ActionListener
 {
 //Make all attributes//////////////////////////////////////////////////////////////
 	JFrame frame;
@@ -45,6 +32,7 @@ public class GuiPage2 extends JFrame implements ActionListener
 	
 	JButton homeB;//Needs declaration for action event
 	JButton submitB;//Need to declare buttons so they can be accessed when making gui
+	JButton fileB;
 	
 	Font fontBig;
 	Font fontBold;
@@ -54,11 +42,12 @@ public class GuiPage2 extends JFrame implements ActionListener
 	JTextArea resultTextArea;
 	
 	JScrollPane scroll;//https://stackoverflow.com/questions/7766844/java-jscrollpane
-	 
+	
+	static String chosenFile;
 	
 	ArrayList<Patient> patientList = new ArrayList<Patient>();
 //Constructor////////////////////
-	public GuiPage2()//Construct
+	public GuiFile()//Construct
 	{ 
 	//MAKE and instantiate//////////
 		//Make dirrectly instead of 
@@ -78,12 +67,21 @@ public class GuiPage2 extends JFrame implements ActionListener
 	    String instructions = new String("Click the buttons that match your symptoms and submit:");
 	    JLabel instructionsLabel  = new JLabel(instructions, SwingConstants.CENTER);//got swing constants from http://www.java2s.com/Code/Java/Swing-JFC/AsimpledemonstrationoftextalignmentinJLabels.htm
 	    
-	    //in panel 4//this triggers event causing other stuff to be made
+	    JPanel fillerPanel1 = new JPanel();//to fill the spaces to make the input grid look right
+	    JPanel fillerPanel2 = new JPanel();
+	    JPanel fillerPanel3 = new JPanel();//to fill the spaces to make the input grid look right
+	    JPanel fillerPanel4 = new JPanel();
+	    
+	    //in panel 2//this triggers event causing other stuff to be made
+	    JPanel filePanel = new JPanel();//Panel to put file button on so it doesnt fill the whole gridslot
+	    fileB = new JButton("Change file");//Button for choosing new file
+	    fileB.addActionListener(this);
+	    
 	    JPanel submitPanel = new JPanel();//Panel to put submit button on so it doesnt fill the whole gridslot
-	    submitB = new JButton("Submit");//Button for running findprobabilty class
+	    submitB = new JButton("Show list of patients");//Button for running findprobabilty class
 	    submitB.addActionListener(this);
 	    
-	    resultTextArea = new JTextArea("");//got swing constants from http://www.java2s.com/Code/Java/Swing-JFC/AsimpledemonstrationoftextalignmentinJLabels.htm
+	    resultTextArea = new JTextArea();//got swing constants from http://www.java2s.com/Code/Java/Swing-JFC/AsimpledemonstrationoftextalignmentinJLabels.htm
 		scroll = new JScrollPane(resultTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);//add scrollbar to textarea
 	    
 	//ADD//////////
@@ -96,12 +94,14 @@ public class GuiPage2 extends JFrame implements ActionListener
 		homeBPanel.add(homeB);//add home button to panel so can align to top left
 		panel1.add(homeBPanel);
 		
-		panel2.add(instructionsLabel);
+		panel2.add(fillerPanel1);
+		filePanel.add(fileB);//Make panel so button doesn fill entire area
+		panel2.add(filePanel);
+		panel2.add(fillerPanel3);
+		submitPanel.add(submitB);//Make panel so button doesn fill entire area
+		panel2.add(submitPanel);
 		
-		panel3.add(scroll);//show in gui
-		//for places to put submit button
-	    submitPanel.add(submitB);
-		panel2.add(submitPanel);//panel that holds submit button
+		panel3.add(scroll);//add the scroll box of results
 		
 	//EDIT AND SET//////////
 	    //Set layout details
@@ -113,6 +113,7 @@ public class GuiPage2 extends JFrame implements ActionListener
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//Close properly
 	    frame.setLayout(new GridLayout(4,1));//grid layout of rows, columns for the entire window
 	    
+	    panel2.setLayout(new GridLayout(4,1));
 	    //For testing
 	    panel1.setBackground(Color.green);
 	    panel2.setBackground(Color.blue);
@@ -132,10 +133,15 @@ public class GuiPage2 extends JFrame implements ActionListener
 	    homeB.setFocusable(false);
 	    homeB.setPreferredSize(new Dimension(120, 50));//width,height//Set the size of the button within the panel thats the full grid size
 	    homeB.setBackground(new Color(220,220,220));
+	    //For file button style
+	    fileB.setFont(fontBold);
+	    fileB.setFocusable(false);
+	    fileB.setPreferredSize(new Dimension(300, 50));//row,col//Set the size of the button within the panel thats the full grid size
+	    fileB.setBackground(new Color(220,220,220));
 	    //For submit button
 	    submitB.setFont(fontBold);
 	    submitB.setFocusable(false);
-	    submitB.setPreferredSize(new Dimension(250, 50));//row,col//Set the size of the button within the panel thats the full grid size
+	    submitB.setPreferredSize(new Dimension(300, 50));//row,col//Set the size of the button within the panel thats the full grid size
 	    submitB.setBackground(new Color(220,220,220));
 	    
 		
@@ -143,7 +149,7 @@ public class GuiPage2 extends JFrame implements ActionListener
 		resultTextArea.setEditable(false);
 		
 		scroll.setVisible(false);
-		scroll.setPreferredSize(new Dimension(800,240));
+		scroll.setPreferredSize(new Dimension(900,240));
 		
 		resultTextArea.setFont(font);//have matching font
 		resultTextArea.setEditable(false);
@@ -154,6 +160,23 @@ public class GuiPage2 extends JFrame implements ActionListener
 	}  
 
 //Methods///////////
+	
+	//allow user to change the file of testcases
+	public String chooseFile()//got from https://docs.oracle.com/javase/7/docs/api/javax/swing/JFileChooser.html
+	{
+		JFileChooser theFile = new JFileChooser("src\\..");//the string is the path to open in, ..means go back one
+		String filePath = "src\\com\\assignment\\machinelearning\\TestCases.csv";
+		theFile.setFileSelectionMode(JFileChooser.FILES_ONLY);//files only means no folders
+		theFile.setFileFilter(new FileNameExtensionFilter("text", "csv", "CSV"));//only allow these types of files
+		
+		theFile.showOpenDialog(GuiFile.this);//to make the popup show
+		theFile.setVisible(true);//make gui show
+		
+		filePath = theFile.getSelectedFile().toString();//where the chosen file string is stored
+		Control.setChosenFile(filePath);
+		return filePath;
+	}
+	
 	public void actionPerformed(ActionEvent EV)
 	{
 		//Home button
@@ -162,15 +185,19 @@ public class GuiPage2 extends JFrame implements ActionListener
 			GuiHome guiHome = new GuiHome();
 			frame.dispose();
 		}
+		if(EV.getSource() == fileB)//get source shows what functionality triggered it
+		{
+			System.out.println("Returned string: "+chooseFile());
+		}
 		if(EV.getSource() == submitB)//get source shows what functionality triggered it
 		{
 			//Open file to get a list from to display to user
-			FileProcessor fp1 = new FileProcessor("src\\com\\assignment\\machinelearning\\TestCases.csv");
+			FileProcessor fp1 = new FileProcessor(Control.getChosenFile());
 			fp1.openFile();//open just to get array from file
 			patientList = fp1.readFile();//fills array list from file. make new one here instead of calling across classes//Makes with 100% of values.
 			fp1.closeFile();
 			
-			resultsString = resultsString+("");//Empty string so only new values go in
+			resultsString = ("");//Empty string so only new values go in
 			for(int i = 0; i < patientList.size(); i++)//add everything from list that is made form file
 			{
 				//MAke everything in here so it only shows once the user submits
@@ -181,6 +208,4 @@ public class GuiPage2 extends JFrame implements ActionListener
 			frame.revalidate();//update window with new information
 		}
 	}
-	
-	
 }

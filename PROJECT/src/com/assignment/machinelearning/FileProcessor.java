@@ -1,5 +1,4 @@
-//TODO make the file path changeable in app
-//Make open and close file
+
 package com.assignment.machinelearning;
 
 import java.io.File;

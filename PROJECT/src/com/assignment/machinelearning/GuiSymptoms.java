@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Dimension;
 
-import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,18 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.ToolTipManager;
-import javax.swing.border.EmptyBorder;
-
-import com.sun.xml.internal.ws.api.Component;
-
-import javafx.geometry.Pos;
-
-import java.util.ArrayList;
-import java.util.Random;
 import java.awt.Color;
 
 public class GuiSymptoms extends JFrame implements ActionListener
@@ -274,6 +263,7 @@ public class GuiSymptoms extends JFrame implements ActionListener
 			GuiHome guiHome = new GuiHome();
 			frame.dispose();
 		}
+		
 		if(EV.getSource() == submitB)//get source shows what functionality triggered it
 		{
 			String inputTemp = null;//Values that will be used to pass to array

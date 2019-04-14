@@ -1,6 +1,5 @@
  package com.assignment.machinelearning;
 
-
 public class Patient 
 {
 //Attributes/////////
@@ -21,7 +20,7 @@ public class Patient
 //Methods//////////
 	public String toString()
 	{
-		return("Temp:" +getTemperature()+" Aches:"+getAches()+" SoreThroat:"+getSoreThroat()+" Tonsilitis: "+getTonsillitis());
+		return("Temperature: " +getTemperature()+",  Aches: "+getAches()+",  SoreThroat: "+getSoreThroat()+",  Tonsilitis: "+getTonsillitis());
 	}
 	
 //GETTERS AND SETTERS/////////////////

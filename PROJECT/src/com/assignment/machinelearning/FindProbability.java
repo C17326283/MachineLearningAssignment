@@ -36,7 +36,7 @@ public class FindProbability
 		this.aches = aches;
 		this.sore = sore;
 		
-		FileProcessor fp = new FileProcessor("src\\com\\assignment\\machinelearning\\TestCases.csv");//Constructs a file processor object which just assigns the filename
+		FileProcessor fp = new FileProcessor(Control.getChosenFile());//Constructs a file processor object which just assigns the filename
 		fp.openFile();
 		trainingCaseList = fp.readFile();//fills array list from file. make new one here instead of calling across classes
 		fp.closeFile();
